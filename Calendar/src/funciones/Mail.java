@@ -1,5 +1,5 @@
 
-package Funciones;
+package funciones;
 
 import java.util.Properties;
 import javax.mail.Message;
