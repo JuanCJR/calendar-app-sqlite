@@ -2,6 +2,7 @@
 package funciones;
 
 import java.util.Properties;
+import java.util.Random;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -13,9 +14,16 @@ import javax.swing.JOptionPane;
 public class Mail {
 
 
-public static void sendEmail(String destinatario, String asunto, String cuerpo){
+public static int sendEmail(String destinatario){
+    Random r = new Random();
+    String asunto ="Recuperacion de Contraseña";
+    int codigo = r.nextInt(9999);
+    String cuerpo="Su codigo de verificacion es el siguiente: "+
+            "\n"+
+            "\n"+
+            "Codigo:" + codigo;
     
-    String remitente = "no-repy@CalenderApp.com";
+    String remitente = "no-reply@Calenderapp.com";
     
     Properties propiedades = System.getProperties();
     propiedades.put("mail.smtp.host","aspmx.l.google.com"); //Servidor de Correos SMTP de google
@@ -39,9 +47,12 @@ public static void sendEmail(String destinatario, String asunto, String cuerpo){
         transport.sendMessage(message, message.getAllRecipients());
         transport.close();
         
+        
     } catch (MessagingException e) {
        JOptionPane.showMessageDialog(null,"Error: " + e.getMessage(), "Error!!!",JOptionPane.ERROR_MESSAGE);
     }
+    return codigo;
+   
 }//.   
 
 

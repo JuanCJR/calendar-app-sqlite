@@ -7,10 +7,26 @@ package principal;
 
 import funciones.*;
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -39,7 +55,6 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField2 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -50,8 +65,6 @@ public class Login extends javax.swing.JFrame {
         txtRestablecer = new javax.swing.JLabel();
         btnRegistro = new javax.swing.JButton();
         btnLogin = new javax.swing.JButton();
-
-        jTextField2.setText("jTextField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -70,7 +83,9 @@ public class Login extends javax.swing.JFrame {
 
         jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField1.setToolTipText("");
         jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
+        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         jPasswordField1.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jPasswordField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -103,6 +118,9 @@ public class Login extends javax.swing.JFrame {
             }
         });
         txtRestablecer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtRestablecerMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 txtRestablecerMouseExited(evt);
             }
@@ -138,6 +156,11 @@ public class Login extends javax.swing.JFrame {
         btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnLoginMouseExited(evt);
+            }
+        });
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
             }
         });
 
@@ -207,16 +230,16 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtRestablecerMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRestablecerMouseMoved
+    private void txtRestablecerMouseMoved(MouseEvent evt) {//GEN-FIRST:event_txtRestablecerMouseMoved
         txtRestablecer.setForeground(Color.white);
     }//GEN-LAST:event_txtRestablecerMouseMoved
 
-    private void txtRestablecerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRestablecerMouseExited
+    private void txtRestablecerMouseExited(MouseEvent evt) {//GEN-FIRST:event_txtRestablecerMouseExited
         Color cp = new Color(255,127,39);
         txtRestablecer.setForeground(cp);
     }//GEN-LAST:event_txtRestablecerMouseExited
 
-    private void jCheckBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox1MouseClicked
+    private void jCheckBox1MouseClicked(MouseEvent evt) {//GEN-FIRST:event_jCheckBox1MouseClicked
        
         
        if(estadoVisble == false){
@@ -236,21 +259,24 @@ public class Login extends javax.swing.JFrame {
        // jPasswordField1.setEchoChar('.');
     }//GEN-LAST:event_jCheckBox1MouseClicked
 
-    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
+    private void btnRegistroActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
        
-       Mail.sendEmail("juancarlos.jimenez@cliptecnologia.com", "Correo de prueba","Correo de prueba desde Java");
+        RestablecerContrasena RS = new RestablecerContrasena();
+        RS.setVisible(true);
+       
+    //Mail.sendEmail("juancarlos.jimenez@cliptecnologia.com");
        
        
         
         
     }//GEN-LAST:event_btnRegistroActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void jCheckBox1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
    
-    private void btnRegistroMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseMoved
+    private void btnRegistroMouseMoved(MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseMoved
        
        // btnRegistro.setIcon(new ImageIcon("src/iconos/add_user2.png"));
         Funciones.switchBtnIcon(getClass(),btnRegistro,"add_user",2);
@@ -258,18 +284,26 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnRegistroMouseMoved
 
-    private void btnRegistroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseExited
+    private void btnRegistroMouseExited(MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseExited
     //   btnRegistro.setIcon(new ImageIcon("src/iconos/add_user1.png"));
         Funciones.switchBtnIcon(getClass(),btnRegistro,"add_user",1);
     }//GEN-LAST:event_btnRegistroMouseExited
 
-    private void btnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
+    private void btnLoginMouseExited(MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
         Funciones.switchBtnIcon(getClass(), btnLogin, "login",1);
     }//GEN-LAST:event_btnLoginMouseExited
 
-    private void btnLoginMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseMoved
+    private void btnLoginMouseMoved(MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseMoved
        Funciones.switchBtnIcon(getClass(), btnLogin, "login",2);
     }//GEN-LAST:event_btnLoginMouseMoved
+
+    private void txtRestablecerMouseClicked(MouseEvent evt) {//GEN-FIRST:event_txtRestablecerMouseClicked
+        
+    }//GEN-LAST:event_txtRestablecerMouseClicked
+
+    private void btnLoginActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,16 +341,15 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
-    private javax.swing.JButton btnRegistro;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JLabel txtRestablecer;
+    javax.swing.JButton btnLogin;
+    javax.swing.JButton btnRegistro;
+    javax.swing.JCheckBox jCheckBox1;
+    javax.swing.JLabel jLabel1;
+    javax.swing.JLabel jLabel2;
+    javax.swing.JLabel jLabel4;
+    javax.swing.JPanel jPanel1;
+    javax.swing.JPasswordField jPasswordField1;
+    javax.swing.JTextField jTextField1;
+    javax.swing.JLabel txtRestablecer;
     // End of variables declaration//GEN-END:variables
 }
