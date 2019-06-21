@@ -7,26 +7,10 @@ package principal;
 
 import funciones.*;
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle;
-import javax.swing.WindowConstants;
+import gestionbd.*;
 
 /**
  *
@@ -35,15 +19,17 @@ import javax.swing.WindowConstants;
 public class Login extends javax.swing.JFrame {
 
     boolean estadoVisble = false;
-
+    GestionBD gbd = new GestionBD();
+    
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
         
         ImageIcon iconoApp = new javax.swing.ImageIcon(getClass().getResource("/imagenes/logoSolo.png"));
-        this.setTitle("Calender");
+        this.setTitle("Calendar");
         this.setIconImage(iconoApp.getImage());
-        
+        gbd.crearBD();
+               
     }
 
     /**
@@ -261,8 +247,8 @@ public class Login extends javax.swing.JFrame {
 
     private void btnRegistroActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
        
-        RestablecerContrasena RS = new RestablecerContrasena();
-        RS.setVisible(true);
+        RegistroUsuario rg = new RegistroUsuario();
+        rg.setVisible(true);
        
     //Mail.sendEmail("juancarlos.jimenez@cliptecnologia.com");
        
@@ -298,7 +284,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginMouseMoved
 
     private void txtRestablecerMouseClicked(MouseEvent evt) {//GEN-FIRST:event_txtRestablecerMouseClicked
-        
+        RestablecerContrasena RS = new RestablecerContrasena();
+        RS.setVisible(true);
     }//GEN-LAST:event_txtRestablecerMouseClicked
 
     private void btnLoginActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
