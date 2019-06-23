@@ -84,19 +84,19 @@ public class GestionBD {
         try{
             Class.forName(DRIVER);
             conn = DriverManager.getConnection(URL);
-            
             sentencia = conn.createStatement();
             String SQL = "SELECT NOM_USUARIO FROM USUARIOS "+
                     "where NOM_USUARIO = "+"'"+usuario+"'";
-            rs = sentencia.executeQuery(SQL); 
+            rs = sentencia.executeQuery(SQL);
+           
             
-            if (rs.getString("NOM_USUARIO")=="")
+            if ( rs.isClosed()){
                 usuarioExiste = false;
-                else
+            }else{
                 usuarioExiste = true;
+               
+            }
             
-            
-            sentencia.close();
             conn.close();
                     
             

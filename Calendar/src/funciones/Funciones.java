@@ -13,10 +13,12 @@ public class Funciones {
     }
 
     //Switchea color de los Label
-  public static void switchTxtIcon(JLabel txt, String icono, int nro){
-        
-        txt.setIcon(new ImageIcon("/iconos/"+ txt + nro +".png"));
-    }
+  public static void switchTxtIcon(Class clase, JLabel txt, String icono, int nro){
+         
+         String Url = "/iconos/"+ icono + nro +".png";
+         txt.setIcon(new javax.swing.ImageIcon(clase.getResource(Url)));
+         
+  }
 
     
 }
