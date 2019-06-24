@@ -1,5 +1,7 @@
 package funciones;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -39,6 +41,20 @@ public class Funciones {
       
       
   }//.
+  
+  
+  //Devuelve Fecha
+  public static String getFecha(){
+      String fecha;
+      
+        Calendar calendar = new GregorianCalendar();
+        String dia = Integer.toString(calendar.get(Calendar.DATE));
+        String mes = Integer.toString(calendar.get(Calendar.MONTH));
+        String a = Integer.toString(calendar.get(Calendar.YEAR));
+        fecha = dia+"-"+mes+"-"+a;
+        
+      return fecha;
+  }
     
   
 

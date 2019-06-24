@@ -3,6 +3,7 @@ package gestionbd;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
+import funciones.Funciones;
 
 public class GestionBD {
     
@@ -105,6 +106,79 @@ public class GestionBD {
         } 
         
         return usuarioExiste;
+    };//.
+      
+      //Valida Inicio de sesion
+      
+      public boolean iniciaSesion(String Usuario, String passwd){
+          //true si el usuario existe
+          boolean vUsuario = validaUsuario(Usuario);
+          boolean sesion = false;
+          
+          if(vUsuario){
+                try{
+                  Class.forName(DRIVER);
+                  conn = DriverManager.getConnection(URL);
+                  sentencia = conn.createStatement();
+                  String SQL = "SELECT NOM_USUARIO,PASSWD FROM USUARIOS "+
+                          "where NOM_USUARIO = "+"'"+Usuario+"' AND PASSWD = "+"'"+passwd+"'";
+                    System.out.println(SQL);
+                  rs = sentencia.executeQuery(SQL);
+
+
+                  if ( rs.isClosed()){
+                      sesion = false;
+                  }else{
+                      sesion = true;
+
+                  }
+
+                  conn.close();
+
+
+                }catch(ClassNotFoundException | SQLException e){
+                    JOptionPane.showMessageDialog(null, "Error:" + e,"Error!!",JOptionPane.ERROR_MESSAGE);
+                } 
+            }else{
+               JOptionPane.showMessageDialog(null, "El nombre de usuario que ingreso no existe:", "Error!!",JOptionPane.ERROR_MESSAGE);
+          }
+            
+          if (sesion==false){
+        
+              JOptionPane.showMessageDialog(null, "Contraseña Incorrecta:", "Error!!",JOptionPane.ERROR_MESSAGE);
+                
+          
+          }
+          return sesion;    
+                
+      }//.
+      
+      
+      
+      
+      
+      
+      //Crea Tarea
+      public void CreaTarea(String Descripcion, String prioridad, String fecha,String cod_usuario,String cod_tarea){
+               
+        try{
+            Class.forName(DRIVER);
+            conn = DriverManager.getConnection(URL);
+            
+            sentencia = conn.createStatement();
+            String SQL = "INSERT INTO TAREAS (DESCRIPCION, PRIORIDAD,PORCENTAJE,ESTADO,FECHA_INICIO,COD_USUARIO,CODTIPO_TAREA) VALUES"+
+                    "('"+Descripcion+"','"+prioridad+"','0','0','"+fecha+"','"+cod_usuario+"','"+cod_tarea+"')";
+            
+            sentencia.executeUpdate(SQL);
+           JOptionPane.showMessageDialog(null, "Nueva tarea creada", "EXITO!!",JOptionPane.INFORMATION_MESSAGE);
+            
+            sentencia.close();
+            conn.close();
+                    
+            
+        }catch(ClassNotFoundException | SQLException e){
+            JOptionPane.showMessageDialog(null, "Error:" + e,"Error!!",JOptionPane.ERROR_MESSAGE);
+        } 
     };//. 
     
     
