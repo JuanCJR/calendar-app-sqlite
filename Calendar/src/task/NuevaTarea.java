@@ -287,7 +287,7 @@ public class NuevaTarea extends javax.swing.JFrame {
         String Fecha = Funciones.getFecha();
         String Descripcion = txtfDescripcion.getText();
         String Prioridad = null;
-        String codTarea = Integer.toString(cbTipoTarea.getSelectedIndex());
+        String codTarea = Integer.toString(cbTipoTarea.getSelectedIndex()+1);
         String codUsuario = Integer.toString(gbd.getCodUsuario(Usuario));
         if(rbBaja.isSelected()){
             Prioridad = rbBaja.getText();

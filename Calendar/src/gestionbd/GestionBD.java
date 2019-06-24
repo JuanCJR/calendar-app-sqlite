@@ -123,7 +123,7 @@ public class GestionBD {
                   sentencia = conn.createStatement();
                   String SQL = "SELECT NOM_USUARIO,PASSWD FROM USUARIOS "+
                           "where NOM_USUARIO = "+"'"+Usuario+"' AND PASSWD = "+"'"+passwd+"'";
-                    System.out.println(SQL);
+                    
                   rs = sentencia.executeQuery(SQL);
 
 
