@@ -3,6 +3,7 @@ package funciones;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class Funciones {
 
@@ -18,7 +19,28 @@ public class Funciones {
          String Url = "/iconos/"+ icono + nro +".png";
          txt.setIcon(new javax.swing.ImageIcon(clase.getResource(Url)));
          
-  }
+  }//.
+  
+    //Funcion que valida contraseñas ingresadas
+  public static boolean validaContraseña (String passwd, String confirmPasswd){
+      boolean estado = false;
+      
+      if (passwd.equals(confirmPasswd))
+          estado = true;
+      else
+          estado = false;
+      
+      return estado;
+      
+  }//.
+  
+    //Funcion que valida txtField vacios
+  public static void validaTxtField(JTextField [] campos){
+      
+      
+  }//.
+    
+  
 
     
 }

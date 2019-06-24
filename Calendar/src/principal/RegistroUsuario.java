@@ -5,7 +5,8 @@ import gestionbd.*;
 public class RegistroUsuario extends javax.swing.JFrame {
 
      GestionBD gbd = new GestionBD();
-     
+     Boolean valida_u;
+     Boolean valida_c;
     public RegistroUsuario() {
         initComponents();
     }
@@ -27,15 +28,16 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtfUsuario = new javax.swing.JTextField();
         txtfNombre = new javax.swing.JTextField();
-        txtfPassw = new javax.swing.JPasswordField();
-        txtFconfirmarPass = new javax.swing.JPasswordField();
+        txtfPasswd = new javax.swing.JPasswordField();
+        txtfConfirmarPass = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
-        btnLogin = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txtfApellido = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtfEmail = new javax.swing.JTextField();
         txtValidaUser = new javax.swing.JLabel();
+        txtValidaPass = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,7 +63,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 127, 39));
-        jLabel6.setText("Nombre de Usuario:");
+        jLabel6.setText("Usuario:");
 
         txtfUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtfUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -78,6 +80,11 @@ public class RegistroUsuario extends javax.swing.JFrame {
                 txtfUsuarioMouseReleased(evt);
             }
         });
+        txtfUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfUsuarioActionPerformed(evt);
+            }
+        });
 
         txtfNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtfNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -90,33 +97,33 @@ public class RegistroUsuario extends javax.swing.JFrame {
             }
         });
 
-        txtfPassw.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        txtfPassw.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtfPassw.setToolTipText("");
-        txtfPassw.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
+        txtfPasswd.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        txtfPasswd.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtfPasswd.setToolTipText("");
+        txtfPasswd.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
 
-        txtFconfirmarPass.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        txtFconfirmarPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtFconfirmarPass.setToolTipText("");
-        txtFconfirmarPass.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
+        txtfConfirmarPass.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        txtfConfirmarPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtfConfirmarPass.setToolTipText("");
+        txtfConfirmarPass.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logoSoloPequeño.png"))); // NOI18N
 
-        btnLogin.setBackground(new java.awt.Color(42, 43, 74));
-        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/login1.png"))); // NOI18N
-        btnLogin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        btnAceptar.setBackground(new java.awt.Color(42, 43, 74));
+        btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/login1.png"))); // NOI18N
+        btnAceptar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                btnLoginMouseMoved(evt);
+                btnAceptarMouseMoved(evt);
             }
         });
-        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnLoginMouseExited(evt);
+                btnAceptarMouseExited(evt);
             }
         });
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
+                btnAceptarActionPerformed(evt);
             }
         });
 
@@ -143,47 +150,72 @@ public class RegistroUsuario extends javax.swing.JFrame {
         txtValidaUser.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtValidaUser.setForeground(new java.awt.Color(255, 127, 39));
         txtValidaUser.setText("...");
+        txtValidaUser.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                txtValidaUserMouseMoved(evt);
+            }
+        });
+        txtValidaUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtValidaUserMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                txtValidaUserMouseReleased(evt);
+            }
+        });
+
+        txtValidaPass.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtValidaPass.setForeground(new java.awt.Color(255, 127, 39));
+        txtValidaPass.setText("...");
+        txtValidaPass.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                txtValidaPassMouseMoved(evt);
+            }
+        });
+        txtValidaPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtValidaPassMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel7))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtfNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtfApellido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtfEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtfPassw, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFconfirmarPass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtfPasswd, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtValidaPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtfConfirmarPass, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtValidaUser, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtValidaUser)))
-                .addContainerGap(83, Short.MAX_VALUE))
+                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(135, 135, 135))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(127, 127, 127))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,83 +223,102 @@ public class RegistroUsuario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(btnLogin)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(txtfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtValidaUser)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(txtfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtValidaUser)))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(txtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(txtfApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtfApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(txtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(txtfPassw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtfPasswd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtValidaPass))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(txtFconfirmarPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26))))
+                            .addComponent(txtfConfirmarPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnAceptar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseMoved
-        Funciones.switchBtnIcon(getClass(), btnLogin, "login",2);
-    }//GEN-LAST:event_btnLoginMouseMoved
+    private void btnAceptarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseMoved
+        Funciones.switchBtnIcon(getClass(), btnAceptar, "login",2);
+    }//GEN-LAST:event_btnAceptarMouseMoved
 
-    private void btnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
-        Funciones.switchBtnIcon(getClass(), btnLogin, "login",1);
-    }//GEN-LAST:event_btnLoginMouseExited
+    private void btnAceptarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseExited
+        Funciones.switchBtnIcon(getClass(), btnAceptar, "login",1);
+    }//GEN-LAST:event_btnAceptarMouseExited
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+                
+                               
+                String usuario = txtfUsuario.getText();
+                String nombre = txtfNombre.getText();
+                String apellido = txtfApellido.getText();
+                String email = txtfEmail.getText();
+                String pass =  new String(txtfPasswd.getPassword());
+                String confirmPass = new String(txtfConfirmarPass.getPassword());
+                valida_c =Funciones.validaContraseña(pass, confirmPass); 
+                
+                if(valida_c){
+                    
+                    gbd.CreaUsuario(usuario, nombre, apellido, email, pass);
+                    this.dispose();
+                    
+                }else{
+                    
+                    Funciones.switchTxtIcon(getClass(), txtValidaPass, "warning", 1);
+                    txtValidaPass.setToolTipText("Las contraseñas ingresadas no coinciden. Ingresar ambas contraseñas nuevamente");
+                    txtValidaPass.setText("");
+                    txtfPasswd.setText("");
+                    txtfConfirmarPass.setText("");
+                    
+                
+                    
+                }
+                     
+                  
+                    
+                
+                    
+               
         
-             Boolean valida_u = gbd.validaUsuario(txtfUsuario.getText());
         
-            if (valida_u == true){
-                Funciones.switchTxtIcon(getClass(),txtValidaUser , "warning", 1);
-                System.out.println("El usuario ya existe");
-            }
-        
-//        String usuario = txtfUsuario.getText();
-//        String nombre = txtfNombre.getText();
-//        String apellido = txtfApellido.getText();
-//        String email = txtfEmail.getText();
-//        String pass =  new String(txtfPassw.getPassword());
-//      
-//        gbd.CreaUsuario(usuario, nombre, apellido, email, pass);
-//        
-//        
-//        
-    }//GEN-LAST:event_btnLoginActionPerformed
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void txtfUsuarioMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtfUsuarioMouseReleased
         // TODO add your handling code here:
@@ -275,13 +326,94 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
     private void txtfUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfUsuarioFocusLost
         
+           valida_u = gbd.validaUsuario(txtfUsuario.getText());
+        
+            if (valida_u == true){
+                Funciones.switchTxtIcon(getClass(),txtValidaUser , "warning", 1);
+                
+                txtValidaUser.setToolTipText("Este nombre de usuario ya existe, por favor ingresar un nombre de usuario diferente");
+                txtValidaUser.setText("");
+                btnAceptar.setEnabled(false);
+            
+            }else  { 
+               
+                btnAceptar.setEnabled(true);
+                Funciones.switchTxtIcon(getClass(),txtValidaUser , "checked_user", 1);
+                
+                txtValidaUser.setToolTipText("Nombre de usario correcto.");
+                txtValidaUser.setText("");
+            }
+        
+      
       
     }//GEN-LAST:event_txtfUsuarioFocusLost
 
     private void txtfNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtfNombreFocusGained
-     
+        
         
     }//GEN-LAST:event_txtfNombreFocusGained
+
+    private void txtfUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfUsuarioActionPerformed
+
+    private void txtValidaUserMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtValidaUserMouseMoved
+       if(txtValidaUser.getText() == "..."){
+          txtValidaUser.setText("...");
+      }else{
+        if (valida_u){
+           Funciones.switchTxtIcon(getClass(), txtValidaUser,"warning",2);
+       }
+       else{
+            Funciones.switchTxtIcon(getClass(), txtValidaUser,"checked_user",2);
+       }
+       }
+           
+    }//GEN-LAST:event_txtValidaUserMouseMoved
+
+    private void txtValidaUserMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtValidaUserMouseReleased
+            
+       
+    }//GEN-LAST:event_txtValidaUserMouseReleased
+
+    private void txtValidaUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtValidaUserMouseExited
+      if(txtValidaUser.getText() == "..."){
+          txtValidaUser.setText("...");
+      }else{
+        if (valida_u){
+           Funciones.switchTxtIcon(getClass(), txtValidaUser,"warning",1);
+       }
+       else{
+            Funciones.switchTxtIcon(getClass(), txtValidaUser,"checked_user",1);
+       }
+      }
+         
+    }//GEN-LAST:event_txtValidaUserMouseExited
+
+    private void txtValidaPassMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtValidaPassMouseMoved
+        try{   
+        if(txtValidaPass.getText().equals("..."))
+           txtValidaPass.setText("...");
+       else
+           Funciones.switchTxtIcon(getClass(), txtValidaPass,"warning", 2);
+        }
+        catch(NullPointerException e){
+            System.out.println("Error: " + e.getMessage());
+        }
+        
+    }//GEN-LAST:event_txtValidaPassMouseMoved
+
+    private void txtValidaPassMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtValidaPassMouseExited
+        try{   
+        if(txtValidaPass.getText().equals("..."))
+           txtValidaPass.setText("...");
+       else
+           Funciones.switchTxtIcon(getClass(), txtValidaPass,"warning", 1);
+        }
+        catch(NullPointerException e){
+            System.out.println("Error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_txtValidaPassMouseExited
 
     /**
      * @param args the command line arguments
@@ -319,7 +451,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnAceptar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -329,12 +461,13 @@ public class RegistroUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField txtFconfirmarPass;
+    private javax.swing.JLabel txtValidaPass;
     private javax.swing.JLabel txtValidaUser;
     private javax.swing.JTextField txtfApellido;
+    private javax.swing.JPasswordField txtfConfirmarPass;
     private javax.swing.JTextField txtfEmail;
     private javax.swing.JTextField txtfNombre;
-    private javax.swing.JPasswordField txtfPassw;
+    private javax.swing.JPasswordField txtfPasswd;
     private javax.swing.JTextField txtfUsuario;
     // End of variables declaration//GEN-END:variables
 }
