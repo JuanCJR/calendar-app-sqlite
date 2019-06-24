@@ -44,7 +44,13 @@ public class NuevaTarea extends javax.swing.JFrame {
         initComponents();
         
         ConfigurarRB();
+        String tipoTareas [] = gbd.getTipoTareas();
         
+        for (int i = 0; i < tipoTareas.length; i++) {
+            
+             cbTipoTarea.addItem(tipoTareas[i]);
+        }
+       
         
     }
     
@@ -86,6 +92,8 @@ public class NuevaTarea extends javax.swing.JFrame {
         rbAlta = new javax.swing.JRadioButton();
         rbMuyAlta = new javax.swing.JRadioButton();
         btnNuevaTarea = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        cbTipoTarea = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -169,6 +177,10 @@ public class NuevaTarea extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 127, 39));
+        jLabel8.setText("Tipo Tarea:");
+
         javax.swing.GroupLayout NuevaTareaPanelLayout = new javax.swing.GroupLayout(NuevaTareaPanel);
         NuevaTareaPanel.setLayout(NuevaTareaPanelLayout);
         NuevaTareaPanelLayout.setHorizontalGroup(
@@ -180,47 +192,56 @@ public class NuevaTarea extends javax.swing.JFrame {
                 .addGroup(NuevaTareaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(NuevaTareaPanelLayout.createSequentialGroup()
                         .addGroup(NuevaTareaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addGap(18, 18, 18)
-                        .addGroup(NuevaTareaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1)
                             .addGroup(NuevaTareaPanelLayout.createSequentialGroup()
-                                .addComponent(rbBaja)
+                                .addGroup(NuevaTareaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
                                 .addGap(18, 18, 18)
-                                .addComponent(rbMedia)
-                                .addGap(18, 18, 18)
-                                .addComponent(rbAlta)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(rbMuyAlta))
-                            .addComponent(txtfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addComponent(btnNuevaTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(NuevaTareaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbTipoTarea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(NuevaTareaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(NuevaTareaPanelLayout.createSequentialGroup()
+                                            .addComponent(rbBaja)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(rbMedia)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(rbAlta)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(rbMuyAlta))
+                                        .addComponent(txtfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 61, Short.MAX_VALUE))
                     .addGroup(NuevaTareaPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnNuevaTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         NuevaTareaPanelLayout.setVerticalGroup(
             NuevaTareaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NuevaTareaPanelLayout.createSequentialGroup()
-                .addGroup(NuevaTareaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnNuevaTarea)
-                    .addGroup(NuevaTareaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(NuevaTareaPanelLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel1)
-                            .addGap(18, 18, 18)
-                            .addGroup(NuevaTareaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel6)
-                                .addComponent(txtfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(NuevaTareaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel7)
-                                .addComponent(rbBaja)
-                                .addComponent(rbMedia)
-                                .addComponent(rbAlta)
-                                .addComponent(rbMuyAlta)))
-                        .addComponent(jLabel2)))
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnNuevaTarea)
+                .addContainerGap())
+            .addGroup(NuevaTareaPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(NuevaTareaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(NuevaTareaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(rbBaja)
+                    .addComponent(rbMedia)
+                    .addComponent(rbAlta)
+                    .addComponent(rbMuyAlta))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(NuevaTareaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(cbTipoTarea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -266,23 +287,24 @@ public class NuevaTarea extends javax.swing.JFrame {
         String Fecha = Funciones.getFecha();
         String Descripcion = txtfDescripcion.getText();
         String Prioridad = null;
-        String codTarea = null;
+        String codTarea = Integer.toString(cbTipoTarea.getSelectedIndex());
+        String codUsuario = Integer.toString(gbd.getCodUsuario(Usuario));
         if(rbBaja.isSelected()){
             Prioridad = rbBaja.getText();
-            codTarea = "0";
+            
         }else if(rbMedia.isSelected()){
             Prioridad = rbMedia.getText();
-            codTarea = "1";
+            
         }else if(rbAlta.isSelected()){
             Prioridad = rbAlta.getText();
-            codTarea = "2";
+        
         }else if(rbMuyAlta.isSelected()){
             Prioridad = rbMuyAlta.getText();
-            codTarea = "3";
+           
         }//fin SI.
         
         
-        gbd.CreaTarea(Descripcion, Prioridad, Fecha,"8" , codTarea);
+        gbd.CreaTarea(Descripcion, Prioridad, Fecha, codUsuario, codTarea);
            
     }//GEN-LAST:event_btnNuevaTareaActionPerformed
 
@@ -324,10 +346,12 @@ public class NuevaTarea extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel NuevaTareaPanel;
     private javax.swing.JButton btnNuevaTarea;
+    private javax.swing.JComboBox<String> cbTipoTarea;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JRadioButton rbAlta;
     private javax.swing.JRadioButton rbBaja;
     private javax.swing.JRadioButton rbMedia;

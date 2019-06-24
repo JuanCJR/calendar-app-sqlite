@@ -6,6 +6,7 @@
 package task;
 
 import com.sun.glass.events.KeyEvent;
+import gestionbd.GestionBD;
 import java.awt.LayoutManager;
 import java.util.Arrays;
 import javax.swing.JPanel;
@@ -20,15 +21,20 @@ import principal.Login;
 public class Task extends javax.swing.JFrame {
 
     String Usuario = Login.usuario;
+    GestionBD gbd = new GestionBD();
+    
     public Task() {
         initComponents();
-        JPanel otroPanel = tareasPanel;
-        JPanel otroPane2 = tareasPanel;
-        Panel p = new Panel();
-        Panel p2 = new Panel();
-        jTabbedPane1.add("otro",p.agregaComponentes());
-
-        jTabbedPane1.add("otro2",p2.agregaComponentes());
+        
+        //Muestra tareas en la tabla
+        gbd.muestraTareas(tablaTareas, Usuario);
+        txtUsuario.setText("Usuario: " + Usuario);
+               
+//        Panel p = new Panel();
+//        Panel p2 = new Panel();
+//        jTabbedPane1.add("otro",p.agregaComponentes());
+//
+//        jTabbedPane1.add("otro2",p2.agregaComponentes());
         
         txtUsuario.setText("Usuario: " + Usuario);
     }
@@ -49,12 +55,14 @@ public class Task extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaTareas = new javax.swing.JTable();
         btnNuevaTarea = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        TareasCompPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaTareas1 = new javax.swing.JTable();
         btnNuevaTarea1 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        EstadisticaPanel = new javax.swing.JPanel();
         btnNuevaTarea2 = new javax.swing.JButton();
+        OpcionesPanel = new javax.swing.JPanel();
+        btnNuevaTarea3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JLabel();
@@ -79,7 +87,7 @@ public class Task extends javax.swing.JFrame {
         tareasPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
         tareasPanel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        tablaTareas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tablaTareas.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         tablaTareas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"", "", null, "", null, "", null},
@@ -112,6 +120,8 @@ public class Task extends javax.swing.JFrame {
                 "N° Tarea", "Prioridad", "Tipo", "Descripcion", "Inicio", "% Completado", "Estado"
             }
         ));
+        tablaTareas.setRowHeight(25);
+        tablaTareas.setSelectionBackground(new java.awt.Color(255, 127, 39));
         tablaTareas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tablaTareasKeyReleased(evt);
@@ -151,8 +161,8 @@ public class Task extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Tareas", tareasPanel);
 
-        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        TareasCompPanel.setBackground(new java.awt.Color(51, 51, 51));
+        TareasCompPanel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         tablaTareas1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         tablaTareas1.setModel(new javax.swing.table.DefaultTableModel(
@@ -196,55 +206,79 @@ public class Task extends javax.swing.JFrame {
 
         btnNuevaTarea1.setText("Nueva Tarea");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout TareasCompPanelLayout = new javax.swing.GroupLayout(TareasCompPanel);
+        TareasCompPanel.setLayout(TareasCompPanelLayout);
+        TareasCompPanelLayout.setHorizontalGroup(
+            TareasCompPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TareasCompPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnNuevaTarea1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+        TareasCompPanelLayout.setVerticalGroup(
+            TareasCompPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TareasCompPanelLayout.createSequentialGroup()
+                .addGroup(TareasCompPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TareasCompPanelLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(btnNuevaTarea1))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(TareasCompPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Tareas Completadas", jPanel3);
+        jTabbedPane1.addTab("Tareas Completadas", TareasCompPanel);
 
-        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        EstadisticaPanel.setBackground(new java.awt.Color(51, 51, 51));
+        EstadisticaPanel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         btnNuevaTarea2.setText("Nueva Tarea");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout EstadisticaPanelLayout = new javax.swing.GroupLayout(EstadisticaPanel);
+        EstadisticaPanel.setLayout(EstadisticaPanelLayout);
+        EstadisticaPanelLayout.setHorizontalGroup(
+            EstadisticaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticaPanelLayout.createSequentialGroup()
                 .addGap(753, 753, 753)
                 .addComponent(btnNuevaTarea2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        EstadisticaPanelLayout.setVerticalGroup(
+            EstadisticaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticaPanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(btnNuevaTarea2)
                 .addContainerGap(429, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Estadistica", jPanel4);
+        jTabbedPane1.addTab("Estadistica", EstadisticaPanel);
+
+        OpcionesPanel.setBackground(new java.awt.Color(51, 51, 51));
+        OpcionesPanel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        btnNuevaTarea3.setText("Nueva Tarea");
+
+        javax.swing.GroupLayout OpcionesPanelLayout = new javax.swing.GroupLayout(OpcionesPanel);
+        OpcionesPanel.setLayout(OpcionesPanelLayout);
+        OpcionesPanelLayout.setHorizontalGroup(
+            OpcionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(OpcionesPanelLayout.createSequentialGroup()
+                .addGap(753, 753, 753)
+                .addComponent(btnNuevaTarea3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        OpcionesPanelLayout.setVerticalGroup(
+            OpcionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(OpcionesPanelLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(btnNuevaTarea3)
+                .addContainerGap(429, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Opciones", OpcionesPanel);
 
         jButton2.setText("Nuevo Grupo ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -326,6 +360,11 @@ public class Task extends javax.swing.JFrame {
           System.out.println(nro_tarea);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnNuevaTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTareaActionPerformed
+       NuevaTarea nt = new NuevaTarea();
+       nt.setVisible(true);
+    }//GEN-LAST:event_btnNuevaTareaActionPerformed
+
     private void tablaTareasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaTareasKeyReleased
 
         //Codigo para detectar celdas modificadas en la tabla
@@ -338,10 +377,6 @@ public class Task extends javax.swing.JFrame {
     private void tablaTareas1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaTareas1KeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_tablaTareas1KeyReleased
-
-    private void btnNuevaTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTareaActionPerformed
-       
-    }//GEN-LAST:event_btnNuevaTareaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -379,15 +414,17 @@ public class Task extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel EstadisticaPanel;
+    private javax.swing.JPanel OpcionesPanel;
+    private javax.swing.JPanel TareasCompPanel;
     private javax.swing.JButton btnNuevaTarea;
     private javax.swing.JButton btnNuevaTarea1;
     private javax.swing.JButton btnNuevaTarea2;
+    private javax.swing.JButton btnNuevaTarea3;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
