@@ -171,8 +171,8 @@ public class GestionBD {
             conn = DriverManager.getConnection(URL);
             
             sentencia = conn.createStatement();
-            String SQL = "INSERT INTO TAREAS (DESCRIPCION, PRIORIDAD,PORCENTAJE,ESTADO,FECHA_INICIO,COD_USUARIO,CODTIPO_TAREA) VALUES"+
-                    "('"+Descripcion+"','"+prioridad+"','1','0','"+fecha+"','"+cod_usuario+"','"+cod_tarea+"')";
+            String SQL = "INSERT INTO TAREAS (DESCRIPCION, PRIORIDAD,PORCENTAJE,FECHA_INICIO,COD_USUARIO,CODTIPO_TAREA) VALUES"+
+                    "('"+Descripcion+"','"+prioridad+"','1','"+fecha+"','"+cod_usuario+"','"+cod_tarea+"')";
             
             sentencia.executeUpdate(SQL);
            JOptionPane.showMessageDialog(null, "Nueva tarea creada", "EXITO!!",JOptionPane.INFORMATION_MESSAGE);
@@ -221,7 +221,7 @@ public class GestionBD {
             conn = DriverManager.getConnection(URL);
             sentencia = conn.createStatement();
             String SQL = "SELECT COD_TAREA, PRIORIDAD,TIPO_TAREA.DESCRIPCION, "+
-                    "TAREAS.DESCRIPCION, FECHA_INICIO,PORCENTAJE, ESTADO FROM TAREAS "+
+                    "TAREAS.DESCRIPCION, FECHA_INICIO,PORCENTAJE FROM TAREAS "+
                     "JOIN TIPO_TAREA "+ 
                     "ON TIPO_TAREA.CODTIPO_TAREA = TAREAS.CODTIPO_TAREA "+
                     "WHERE COD_USUARIO = " + codUsuario; 
@@ -234,7 +234,7 @@ public class GestionBD {
             
             while(rs.next()){
                 int porcentaje = rs.getInt("PORCENTAJE");
-                System.out.println(porcentaje);
+                
                 
                     if(porcentaje < 50 || porcentaje >= 1){
                         
@@ -255,7 +255,7 @@ public class GestionBD {
                         tabla.setValueAt( new JLabel(cancel),fila,6);
                     }else if(porcentaje >= 50 && porcentaje < 100){
                         tabla.setValueAt( new JLabel(attention),fila,6);
-                    }else{
+                    }else if (porcentaje == 100) {
                         tabla.setValueAt( new JLabel(ok),fila,6);
                     }
                 
@@ -315,22 +315,66 @@ public class GestionBD {
        
     };//.
         
-        //Devuelve Porcentaje
-     public Integer[] getPorcentaje(){
+    //Elimina tarea
+         public void EliminaTarea(int codTarea){
+               
+        try{
+            Class.forName(DRIVER);
+            conn = DriverManager.getConnection(URL);
+            
+            sentencia = conn.createStatement();
+            String SQL = "DELETE FROM TAREAS "
+                    + "WHERE COD_TAREA ="+codTarea;
+            sentencia.executeUpdate(SQL);
+           JOptionPane.showMessageDialog(null, "Tarea Eliminada", "EXITO!!",JOptionPane.INFORMATION_MESSAGE);
+            
+            sentencia.close();
+            conn.close();
+                    
+            
+        }catch(ClassNotFoundException | SQLException e){
+            JOptionPane.showMessageDialog(null, "Error:" + e,"Error!!",JOptionPane.ERROR_MESSAGE);
+        } 
+    };//. 
+         
+         //Muesta las tareas completadas
+          public void muestraTareasCompletadas(JTable tabla, String usuario){
+        
+           DefaultTableModel tm = (DefaultTableModel) tabla.getModel();
+           String codUsuario = Integer.toString(getCodUsuario(usuario));
            
-         Integer [] porcentaje = new Integer[10];
         try{
             Class.forName(DRIVER);
             conn = DriverManager.getConnection(URL);
             sentencia = conn.createStatement();
-            String SQL = "SELECT PORCENTAJE FROM TAREAS";
-                 
+            String SQL = "SELECT USUARIOS.NOM_USUARIO,COD_TAREA, PRIORIDAD,TIPO_TAREA.DESCRIPCION, "+
+                    "HISTO_TAREAS.DESCRIPCION, FECHA_INICIO,FECHA_FIN,PORCENTAJE FROM HISTO_TAREAS "+
+                    "JOIN USUARIOS "+
+                    "ON USUARIOS.COD_USUARIO = HISTO_TAREAS.COD_USUARIO "+
+                    "JOIN TIPO_TAREA "+ 
+                    "ON TIPO_TAREA.CODTIPO_TAREA = HISTO_TAREAS.CODTIPO_TAREA "+
+                    "WHERE HISTO_TAREAS.COD_USUARIO = " + codUsuario; 
+        
             rs = sentencia.executeQuery(SQL);
             int fila = 0;
+            ImageIcon ok = new ImageIcon(getClass().getResource("/iconos/ok2.png"));
             
             while(rs.next()){
+                   
+                tabla.setValueAt(rs.getString(1), fila, 0);
+                tabla.setValueAt(rs.getInt(2),fila,1);
+                tabla.setValueAt(rs.getString(3),fila,2);
+                tabla.setValueAt(rs.getString(4),fila,3);
+                tabla.setValueAt(rs.getString(5), fila, 4);
+                tabla.setValueAt(rs.getString(6),fila,5);
+                tabla.setValueAt(rs.getString(7),fila,6); 
+                tabla.setValueAt(rs.getString(8),fila,7);
+                tabla.setValueAt( new JLabel(ok),fila,8);
                 
-                porcentaje[fila] = rs.getInt("PORCENTAJE");
+                
+
+//                tm.addRow(new Object[]{rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),"6", new JLabel(img)});
+                
                 fila++;
                 
             }//fin while.
@@ -345,10 +389,30 @@ public class GestionBD {
         }catch(ClassNotFoundException | SQLException e){
             JOptionPane.showMessageDialog(null, "Error:" + e,"Error!!",JOptionPane.ERROR_MESSAGE);
         } 
-        
-            return porcentaje;
-       
+  
     };//.
-    
+       
+    //Elimina tarea
+         public void ActualizaTarea(String campo,String nuevoValor, int codTarea){
+               
+        try{
+            Class.forName(DRIVER);
+            conn = DriverManager.getConnection(URL);
+            
+            sentencia = conn.createStatement();
+            String SQL = "UPDATE TAREAS " +
+                    "SET "+campo+"="+"'"+nuevoValor+"'"+
+                    " WHERE COD_TAREA ="+codTarea;
+            System.out.println(SQL);
+            sentencia.executeUpdate(SQL);
+            System.out.println("Tarea Actualizada"); 
+            sentencia.close();
+            conn.close();
+                    
+            
+        }catch(ClassNotFoundException | SQLException e){
+            JOptionPane.showMessageDialog(null, "Error:" + e,"Error!!",JOptionPane.ERROR_MESSAGE);
+        } 
+    };//. 
     
 }//FIN CLASE.

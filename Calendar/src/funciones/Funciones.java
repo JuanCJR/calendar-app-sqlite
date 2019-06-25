@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class Funciones {
 
@@ -54,9 +55,55 @@ public class Funciones {
         fecha = dia+"-"+mes+"-"+a;
         
       return fecha;
-  }
+  }//.
     
   
 
+  public static DefaultTableModel devuelveModelo(){
+      
+      DefaultTableModel Modelo = new DefaultTableModel(
+            new Object [][] {
+                {"", "", null, "", null, "", null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, "", null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "N° Tarea", "Prioridad", "Tipo", "Descripcion", "Inicio", "Porcentaje", "Estado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false, true, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        };
+      return Modelo;
+  }
+  
+  
     
-}
+}//FIN CLASE.
