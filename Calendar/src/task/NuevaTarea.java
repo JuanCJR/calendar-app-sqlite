@@ -305,7 +305,7 @@ public class NuevaTarea extends javax.swing.JFrame {
         
         
         gbd.CreaTarea(Descripcion, Prioridad, Fecha, codUsuario, codTarea);
-           
+           this.dispose();
     }//GEN-LAST:event_btnNuevaTareaActionPerformed
 
     /**

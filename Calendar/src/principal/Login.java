@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import gestionbd.*;
+import javax.swing.JOptionPane;
 import task.Task;
 
 /**
@@ -27,10 +28,11 @@ public class Login extends javax.swing.JFrame {
     
     public Login() {
         initComponents();
-        this.setLocationRelativeTo(null);
+        
         
         ImageIcon iconoApp = new javax.swing.ImageIcon(getClass().getResource("/imagenes/logoSolo.png"));
         this.setTitle("Calendar");
+        this.setLocationRelativeTo(null);
         this.setIconImage(iconoApp.getImage());
         gbd.crearBD();
                
@@ -295,13 +297,26 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRestablecerMouseClicked
 
     private void btnLoginActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+
         usuario = txtfUsuario.getText();
         String passwd = new String(txtfPasswd.getPassword());
         
-        if(gbd.iniciaSesion(usuario, passwd)){
+        if(usuario.equals("")){
+            JOptionPane.showMessageDialog(null,"Ingrese un nombre de usuario","Mensaje", JOptionPane.OK_OPTION, new ImageIcon(getClass().getResource("/iconos/warning2.png")));
+        }else{
+            if(gbd.iniciaSesion(usuario, passwd)){
             Task task = new Task();
             task.setVisible(true);
+            this.dispose();
+            
         }
+            
+        }
+            
+
+       
+        
+      
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
