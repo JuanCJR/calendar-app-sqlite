@@ -6,6 +6,7 @@
 package task;
 
 import com.sun.glass.events.KeyEvent;
+import funciones.*;
 import gestionbd.GestionBD;
 import java.awt.LayoutManager;
 import java.util.Arrays;
@@ -25,10 +26,16 @@ public class Task extends javax.swing.JFrame {
     
     public Task() {
         initComponents();
+        tablaTareas.setDefaultRenderer(Object.class,new IconRenderer());
+        
         
         //Muestra tareas en la tabla
         gbd.muestraTareas(tablaTareas, Usuario);
         txtUsuario.setText("Usuario: " + Usuario);
+        
+//        MyRenderer mr = new MyRenderer();
+//        tablaTareas.setDefaultRenderer(Object.class,mr);
+        
                
 //        Panel p = new Panel();
 //        Panel p2 = new Panel();
@@ -48,8 +55,8 @@ public class Task extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        panelContenedor = new javax.swing.JPanel();
+        txtTitulo = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         tareasPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -70,12 +77,12 @@ public class Task extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(42, 43, 74));
-        jPanel1.setForeground(new java.awt.Color(42, 43, 74));
+        panelContenedor.setBackground(new java.awt.Color(42, 43, 74));
+        panelContenedor.setForeground(new java.awt.Color(42, 43, 74));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 127, 39));
-        jLabel1.setText("Menu Tareas");
+        txtTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTitulo.setForeground(new java.awt.Color(255, 127, 39));
+        txtTitulo.setText("Menu Tareas");
 
         jTabbedPane1.setBackground(new java.awt.Color(42, 43, 74));
         jTabbedPane1.setForeground(new java.awt.Color(255, 127, 39));
@@ -119,8 +126,16 @@ public class Task extends javax.swing.JFrame {
             new String [] {
                 "N° Tarea", "Prioridad", "Tipo", "Descripcion", "Inicio", "% Completado", "Estado"
             }
-        ));
-        tablaTareas.setRowHeight(25);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaTareas.setRowHeight(30);
         tablaTareas.setSelectionBackground(new java.awt.Color(255, 127, 39));
         tablaTareas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -159,7 +174,7 @@ public class Task extends javax.swing.JFrame {
                 .addContainerGap(107, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Tareas", tareasPanel);
+        jTabbedPane1.addTab("Tareas", new javax.swing.ImageIcon(getClass().getResource("/iconos/edit_user1.png")), tareasPanel); // NOI18N
 
         TareasCompPanel.setBackground(new java.awt.Color(51, 51, 51));
         TareasCompPanel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -295,39 +310,39 @@ public class Task extends javax.swing.JFrame {
         txtUsuario.setForeground(new java.awt.Color(255, 127, 39));
         txtUsuario.setText("Usuario:");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelContenedorLayout = new javax.swing.GroupLayout(panelContenedor);
+        panelContenedor.setLayout(panelContenedorLayout);
+        panelContenedorLayout.setHorizontalGroup(
+            panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelContenedorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelContenedorLayout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtUsuario))
-                    .addComponent(jLabel1)
+                    .addComponent(txtTitulo)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1057, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        panelContenedorLayout.setVerticalGroup(
+            panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContenedorLayout.createSequentialGroup()
+                .addGroup(panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelContenedorLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelContenedorLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(panelContenedorLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(txtUsuario)
                         .addContainerGap(24, Short.MAX_VALUE))))
@@ -339,11 +354,11 @@ public class Task extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1207, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 1207, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -422,15 +437,15 @@ public class Task extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevaTarea2;
     private javax.swing.JButton btnNuevaTarea3;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel panelContenedor;
     private javax.swing.JTable tablaTareas;
     private javax.swing.JTable tablaTareas1;
     private javax.swing.JPanel tareasPanel;
+    private javax.swing.JLabel txtTitulo;
     private javax.swing.JLabel txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

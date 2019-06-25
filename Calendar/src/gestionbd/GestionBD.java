@@ -4,7 +4,10 @@ package gestionbd;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import funciones.Funciones;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class GestionBD {
     
@@ -135,7 +138,13 @@ public class GestionBD {
                   }
 
                   conn.close();
-
+                  
+                  if (sesion==false){
+        
+                      JOptionPane.showMessageDialog(null, "Contraseña Incorrecta:", "Error!!",JOptionPane.ERROR_MESSAGE);
+        
+                 }
+                  
 
                 }catch(ClassNotFoundException | SQLException e){
                     JOptionPane.showMessageDialog(null, "Error:" + e,"Error!!",JOptionPane.ERROR_MESSAGE);
@@ -144,12 +153,7 @@ public class GestionBD {
                JOptionPane.showMessageDialog(null, "El nombre de usuario que ingreso no existe:", "Error!!",JOptionPane.ERROR_MESSAGE);
           }
             
-          if (sesion==false){
-        
-              JOptionPane.showMessageDialog(null, "Contraseña Incorrecta:", "Error!!",JOptionPane.ERROR_MESSAGE);
-                
           
-          }
           return sesion;    
                 
       }//.
@@ -168,7 +172,7 @@ public class GestionBD {
             
             sentencia = conn.createStatement();
             String SQL = "INSERT INTO TAREAS (DESCRIPCION, PRIORIDAD,PORCENTAJE,ESTADO,FECHA_INICIO,COD_USUARIO,CODTIPO_TAREA) VALUES"+
-                    "('"+Descripcion+"','"+prioridad+"','0','0','"+fecha+"','"+cod_usuario+"','"+cod_tarea+"')";
+                    "('"+Descripcion+"','"+prioridad+"','1','0','"+fecha+"','"+cod_usuario+"','"+cod_tarea+"')";
             
             sentencia.executeUpdate(SQL);
            JOptionPane.showMessageDialog(null, "Nueva tarea creada", "EXITO!!",JOptionPane.INFORMATION_MESSAGE);
@@ -208,7 +212,8 @@ public class GestionBD {
        
        //Mostrar Tareas del usuario
        public void muestraTareas(JTable tabla, String usuario){
-         
+        
+           DefaultTableModel tm = (DefaultTableModel) tabla.getModel();
            String codUsuario = Integer.toString(getCodUsuario(usuario));
            
         try{
@@ -223,15 +228,40 @@ public class GestionBD {
         
             rs = sentencia.executeQuery(SQL);
             int fila = 0;
+            ImageIcon cancel = new ImageIcon(getClass().getResource("/iconos/cancel2.png")); 
+            ImageIcon attention = new ImageIcon(getClass().getResource("/iconos/attention2.png"));
+            ImageIcon ok = new ImageIcon(getClass().getResource("/iconos/ok2.png"));
             
             while(rs.next()){
+                int porcentaje = rs.getInt("PORCENTAJE");
+                System.out.println(porcentaje);
+                
+                    if(porcentaje < 50 || porcentaje >= 1){
+                        
+                    }else if(porcentaje >= 50 || porcentaje < 100){
+                       
+                    }else{
+                        
+                    }
+                   
                 tabla.setValueAt(rs.getInt(1),fila,0);
                 tabla.setValueAt(rs.getString(2),fila,1);
                 tabla.setValueAt(rs.getString(3),fila,2);
                 tabla.setValueAt(rs.getString(4), fila, 3);
                 tabla.setValueAt(rs.getString(5),fila,4);
                 tabla.setValueAt(rs.getString(6),fila,5);
-                tabla.setValueAt(rs.getString(7),fila,6);
+                  
+                if(porcentaje < 50 && porcentaje >= 1){
+                        tabla.setValueAt( new JLabel(cancel),fila,6);
+                    }else if(porcentaje >= 50 && porcentaje < 100){
+                        tabla.setValueAt( new JLabel(attention),fila,6);
+                    }else{
+                        tabla.setValueAt( new JLabel(ok),fila,6);
+                    }
+                
+
+//                tm.addRow(new Object[]{rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),"6", new JLabel(img)});
+                
                 fila++;
                 
             }//fin while.
@@ -284,7 +314,41 @@ public class GestionBD {
             return tipoTareas;
        
     };//.
-      
+        
+        //Devuelve Porcentaje
+     public Integer[] getPorcentaje(){
+           
+         Integer [] porcentaje = new Integer[10];
+        try{
+            Class.forName(DRIVER);
+            conn = DriverManager.getConnection(URL);
+            sentencia = conn.createStatement();
+            String SQL = "SELECT PORCENTAJE FROM TAREAS";
+                 
+            rs = sentencia.executeQuery(SQL);
+            int fila = 0;
+            
+            while(rs.next()){
+                
+                porcentaje[fila] = rs.getInt("PORCENTAJE");
+                fila++;
+                
+            }//fin while.
+            rs.close();
+            sentencia.close();
+            conn.close();
+            
+            
+            conn.close();
+           
+            
+        }catch(ClassNotFoundException | SQLException e){
+            JOptionPane.showMessageDialog(null, "Error:" + e,"Error!!",JOptionPane.ERROR_MESSAGE);
+        } 
+        
+            return porcentaje;
+       
+    };//.
     
     
 }//FIN CLASE.
