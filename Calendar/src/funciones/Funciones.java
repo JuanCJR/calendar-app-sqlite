@@ -1,9 +1,12 @@
 package funciones;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class Funciones {
 
@@ -39,8 +42,68 @@ public class Funciones {
       
       
   }//.
+  
+  
+  //Devuelve Fecha
+  public static String getFecha(){
+      String fecha;
+      
+        Calendar calendar = new GregorianCalendar();
+        String dia = Integer.toString(calendar.get(Calendar.DATE));
+        String mes = Integer.toString(calendar.get(Calendar.MONTH));
+        String a = Integer.toString(calendar.get(Calendar.YEAR));
+        fecha = dia+"-"+mes+"-"+a;
+        
+      return fecha;
+  }//.
     
   
 
+  public static DefaultTableModel devuelveModelo(){
+      
+      DefaultTableModel Modelo = new DefaultTableModel(
+            new Object [][] {
+                {"", "", null, "", null, "", null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, "", null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "N° Tarea", "Prioridad", "Tipo", "Descripcion", "Inicio", "Porcentaje", "Estado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false, true, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        };
+      return Modelo;
+  }
+  
+  
     
-}
+}//FIN CLASE.

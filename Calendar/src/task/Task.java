@@ -5,17 +5,46 @@
  */
 package task;
 
+import com.sun.glass.events.KeyEvent;
+import funciones.*;
+import gestionbd.GestionBD;
+import java.awt.LayoutManager;
+import java.util.Arrays;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+import principal.Login;
+
 /**
  *
  * @author jotac
  */
 public class Task extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Task
-     */
+    String Usuario = Login.usuario;
+    GestionBD gbd = new GestionBD();
+    
     public Task() {
         initComponents();
+        tablaTareas.setDefaultRenderer(Object.class,new IconRenderer());
+        tablaTareasCompletadas.setDefaultRenderer(Object.class,new IconRenderer());
+        
+        //Muestra tareas en la tabla
+        gbd.muestraTareas(tablaTareas, Usuario);
+        gbd.muestraTareasCompletadas(tablaTareasCompletadas, Usuario);
+        txtUsuario.setText("Usuario: " + Usuario);
+        
+//        MyRenderer mr = new MyRenderer();
+//        tablaTareas.setDefaultRenderer(Object.class,mr);
+        
+               
+//        Panel p = new Panel();
+//        Panel p2 = new Panel();
+//        jTabbedPane1.add("otro",p.agregaComponentes());
+//
+//        jTabbedPane1.add("otro2",p2.agregaComponentes());
+        
+        txtUsuario.setText("Usuario: " + Usuario);
     }
 
     /**
@@ -27,213 +56,463 @@ public class Task extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        panelContenedor = new javax.swing.JPanel();
+        txtTitulo = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        tareasPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        tablaTareas = new javax.swing.JTable();
+        btnNuevaTarea = new javax.swing.JButton();
+        btnEliminaTarea = new javax.swing.JButton();
+        btnRefrescar1 = new javax.swing.JButton();
+        TareasCompletadasPanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaTareasCompletadas = new javax.swing.JTable();
+        btnRefrescar2 = new javax.swing.JButton();
+        EstadisticaPanel = new javax.swing.JPanel();
+        btnNuevaTarea7 = new javax.swing.JButton();
+        btnNuevaTarea8 = new javax.swing.JButton();
+        OpcionesPanel = new javax.swing.JPanel();
+        btnNuevaTarea9 = new javax.swing.JButton();
+        btnNuevaTarea10 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(42, 43, 74));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Panel Principal", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel1.setForeground(new java.awt.Color(42, 43, 74));
+        panelContenedor.setBackground(new java.awt.Color(42, 43, 74));
+        panelContenedor.setForeground(new java.awt.Color(42, 43, 74));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 127, 39));
-        jLabel1.setText("Grupo de Tareas");
+        txtTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTitulo.setForeground(new java.awt.Color(255, 127, 39));
+        txtTitulo.setText("Menu Tareas");
 
-        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.setBackground(new java.awt.Color(42, 43, 74));
         jTabbedPane1.setForeground(new java.awt.Color(255, 127, 39));
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-        jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTabbedPane1.setToolTipText("");
+        jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTabbedPane1.setDoubleBuffered(true);
+        jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tareasPanel.setBackground(new java.awt.Color(42, 43, 74));
+        tareasPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
+        tareasPanel.setForeground(new java.awt.Color(255, 127, 39));
+        tareasPanel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaTareas.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        tablaTareas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {"", "", null, "", null, "", null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, "", null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "N° Tarea", "Descripcion", "Prioridad", "% Completado", "Estado"
+                "N° Tarea", "Prioridad", "Tipo", "Descripcion", "Inicio", "Porcentaje", "Estado"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false, true, false, true, false
+            };
 
-        jButton1.setText("Nueva Tarea");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaTareas.setRowHeight(30);
+        tablaTareas.setSelectionBackground(new java.awt.Color(255, 127, 39));
+        tablaTareas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tablaTareasKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaTareas);
+        if (tablaTareas.getColumnModel().getColumnCount() > 0) {
+            tablaTareas.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tablaTareas.getColumnModel().getColumn(1).setPreferredWidth(40);
+            tablaTareas.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tablaTareas.getColumnModel().getColumn(3).setPreferredWidth(500);
+            tablaTareas.getColumnModel().getColumn(4).setPreferredWidth(50);
+            tablaTareas.getColumnModel().getColumn(5).setPreferredWidth(40);
+            tablaTareas.getColumnModel().getColumn(6).setPreferredWidth(40);
+        }
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        btnNuevaTarea.setText("Nueva Tarea");
+        btnNuevaTarea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevaTareaActionPerformed(evt);
+            }
+        });
+
+        btnEliminaTarea.setText("Eliminar Tarea");
+        btnEliminaTarea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminaTareaActionPerformed(evt);
+            }
+        });
+
+        btnRefrescar1.setText("Refrescar");
+        btnRefrescar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefrescar1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout tareasPanelLayout = new javax.swing.GroupLayout(tareasPanel);
+        tareasPanel.setLayout(tareasPanelLayout);
+        tareasPanelLayout.setHorizontalGroup(
+            tareasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tareasPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jButton1)
-                .addContainerGap(312, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(tareasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 975, Short.MAX_VALUE)
+                    .addGroup(tareasPanelLayout.createSequentialGroup()
+                        .addComponent(btnNuevaTarea)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRefrescar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEliminaTarea)))
                 .addContainerGap())
         );
+        tareasPanelLayout.setVerticalGroup(
+            tareasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tareasPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addGroup(tareasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNuevaTarea)
+                    .addComponent(btnEliminaTarea)
+                    .addComponent(btnRefrescar1))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
 
-        jTabbedPane1.addTab("TAREA 1", jPanel2);
+        jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/iconos/task2.png")), tareasPanel); // NOI18N
 
-        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        TareasCompletadasPanel.setBackground(new java.awt.Color(42, 43, 74));
+        TareasCompletadasPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
+        TareasCompletadasPanel.setForeground(new java.awt.Color(255, 127, 39));
+        TareasCompletadasPanel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jTable2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaTareasCompletadas.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        tablaTareasCompletadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, "", "", null, "", null, null, "", null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, "", null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "N° Tarea", "Descripcion", "Prioridad", "% Completado", "Estado"
+                "Usuario", "N° Tarea", "Prioridad", "Tipo", "Descripcion", "Inicio", "Fin", "Porcentaje", "Estado"
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, true, true, true, true, false
+            };
 
-        jButton3.setText("Nueva Tarea");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaTareasCompletadas.setRowHeight(30);
+        tablaTareasCompletadas.setSelectionBackground(new java.awt.Color(255, 127, 39));
+        tablaTareasCompletadas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tablaTareasCompletadasKeyReleased(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tablaTareasCompletadas);
+        if (tablaTareasCompletadas.getColumnModel().getColumnCount() > 0) {
+            tablaTareasCompletadas.getColumnModel().getColumn(4).setPreferredWidth(350);
+            tablaTareasCompletadas.getColumnModel().getColumn(6).setPreferredWidth(150);
+        }
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        btnRefrescar2.setText("Refrescar");
+        btnRefrescar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefrescar2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout TareasCompletadasPanelLayout = new javax.swing.GroupLayout(TareasCompletadasPanel);
+        TareasCompletadasPanel.setLayout(TareasCompletadasPanelLayout);
+        TareasCompletadasPanelLayout.setHorizontalGroup(
+            TareasCompletadasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TareasCompletadasPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jButton3)
-                .addContainerGap(312, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jTabbedPane1.addTab("TAREA 2", jPanel3);
-
-        jButton2.setText("Nuevo Grupo ");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jButton2))
+                .addGroup(TareasCompletadasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 975, Short.MAX_VALUE)
+                    .addGroup(TareasCompletadasPanelLayout.createSequentialGroup()
+                        .addComponent(btnRefrescar2)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        TareasCompletadasPanelLayout.setVerticalGroup(
+            TareasCompletadasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TareasCompletadasPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnRefrescar2)
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/iconos/task_complete.png")), TareasCompletadasPanel); // NOI18N
+
+        EstadisticaPanel.setBackground(new java.awt.Color(42, 43, 74));
+        EstadisticaPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
+        EstadisticaPanel.setForeground(new java.awt.Color(255, 127, 39));
+        EstadisticaPanel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        btnNuevaTarea7.setText("Nueva Tarea");
+        btnNuevaTarea7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevaTarea7ActionPerformed(evt);
+            }
+        });
+
+        btnNuevaTarea8.setText("Eliminar Tarea");
+        btnNuevaTarea8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevaTarea8ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout EstadisticaPanelLayout = new javax.swing.GroupLayout(EstadisticaPanel);
+        EstadisticaPanel.setLayout(EstadisticaPanelLayout);
+        EstadisticaPanelLayout.setHorizontalGroup(
+            EstadisticaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticaPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnNuevaTarea7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 781, Short.MAX_VALUE)
+                .addComponent(btnNuevaTarea8)
+                .addContainerGap())
+        );
+        EstadisticaPanelLayout.setVerticalGroup(
+            EstadisticaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticaPanelLayout.createSequentialGroup()
+                .addGap(360, 360, 360)
+                .addGroup(EstadisticaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNuevaTarea7)
+                    .addComponent(btnNuevaTarea8))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/iconos/estadistica.png")), EstadisticaPanel); // NOI18N
+
+        OpcionesPanel.setBackground(new java.awt.Color(42, 43, 74));
+        OpcionesPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
+        OpcionesPanel.setForeground(new java.awt.Color(255, 127, 39));
+        OpcionesPanel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        btnNuevaTarea9.setText("Nueva Tarea");
+        btnNuevaTarea9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevaTarea9ActionPerformed(evt);
+            }
+        });
+
+        btnNuevaTarea10.setText("Eliminar Tarea");
+        btnNuevaTarea10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevaTarea10ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout OpcionesPanelLayout = new javax.swing.GroupLayout(OpcionesPanel);
+        OpcionesPanel.setLayout(OpcionesPanelLayout);
+        OpcionesPanelLayout.setHorizontalGroup(
+            OpcionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(OpcionesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnNuevaTarea9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 781, Short.MAX_VALUE)
+                .addComponent(btnNuevaTarea10)
+                .addContainerGap())
+        );
+        OpcionesPanelLayout.setVerticalGroup(
+            OpcionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(OpcionesPanelLayout.createSequentialGroup()
+                .addGap(360, 360, 360)
+                .addGroup(OpcionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNuevaTarea9)
+                    .addComponent(btnNuevaTarea10))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/iconos/settings.png")), OpcionesPanel); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 127, 39));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logoSoloPequeño.png"))); // NOI18N
+
+        txtUsuario.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        txtUsuario.setForeground(new java.awt.Color(255, 127, 39));
+        txtUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/user.png"))); // NOI18N
+        txtUsuario.setText("Usuario:");
+
+        javax.swing.GroupLayout panelContenedorLayout = new javax.swing.GroupLayout(panelContenedor);
+        panelContenedor.setLayout(panelContenedorLayout);
+        panelContenedorLayout.setHorizontalGroup(
+            panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelContenedorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelContenedorLayout.createSequentialGroup()
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1057, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(panelContenedorLayout.createSequentialGroup()
+                        .addComponent(txtTitulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtUsuario)
+                        .addGap(156, 156, 156)))
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelContenedorLayout.setVerticalGroup(
+            panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContenedorLayout.createSequentialGroup()
+                .addGroup(panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelContenedorLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUsuario))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(panelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 1207, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+            .addComponent(panelContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnNuevaTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTareaActionPerformed
+       NuevaTarea nt = new NuevaTarea();
+       nt.setVisible(true);
+       
+        gbd.muestraTareas(tablaTareas, Usuario);
+    }//GEN-LAST:event_btnNuevaTareaActionPerformed
+
+    private void tablaTareasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaTareasKeyReleased
+
+        //Codigo para detectar celdas modificadas en la tabla
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            DefaultTableModel modeloTabla =(DefaultTableModel) tablaTareas.getModel();
+            int  nro_tarea = (int)modeloTabla.getValueAt(tablaTareas.getSelectedRow(),0);
+            
+            String Campo = tablaTareas.getColumnName(tablaTareas.getSelectedColumn());
+            
+            String  celdaModificada = (String)tablaTareas.getValueAt(tablaTareas.getSelectedRow(),tablaTareas.getSelectedColumn()).toString();
+            
+            gbd.ActualizaTarea(Campo,celdaModificada, nro_tarea);
+            
+        }
+    }//GEN-LAST:event_tablaTareasKeyReleased
+
+    private void btnEliminaTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaTareaActionPerformed
+        
+        DefaultTableModel modeloTabla =(DefaultTableModel) tablaTareas.getModel();
+        int  nro_tarea = (int)modeloTabla.getValueAt(tablaTareas.getSelectedRow(),0);
+        gbd.EliminaTarea(nro_tarea);
+        modeloTabla.removeRow(tablaTareas.getSelectedRow());
+       
+        
+        
+        
+    }//GEN-LAST:event_btnEliminaTareaActionPerformed
+
+    private void tablaTareasCompletadasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaTareasCompletadasKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaTareasCompletadasKeyReleased
+
+    private void btnNuevaTarea7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTarea7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevaTarea7ActionPerformed
+
+    private void btnNuevaTarea8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTarea8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevaTarea8ActionPerformed
+
+    private void btnNuevaTarea9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTarea9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevaTarea9ActionPerformed
+
+    private void btnNuevaTarea10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTarea10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevaTarea10ActionPerformed
+
+    private void btnRefrescar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescar1ActionPerformed
+        DefaultTableModel modeloTabla =(DefaultTableModel) tablaTareas.getModel();
+        modeloTabla.fireTableDataChanged();
+        tablaTareas.setModel(Funciones.devuelveModelo());
+        gbd.muestraTareas(tablaTareas, Usuario);
+
+        
+    }//GEN-LAST:event_btnRefrescar1ActionPerformed
+
+    private void btnRefrescar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescar2ActionPerformed
+        DefaultTableModel modeloTabla2 =(DefaultTableModel) tablaTareasCompletadas.getModel();
+        modeloTabla2.fireTableDataChanged();
+        gbd.muestraTareasCompletadas(tablaTareasCompletadas, Usuario);
+    }//GEN-LAST:event_btnRefrescar2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,17 +550,26 @@ public class Task extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel EstadisticaPanel;
+    private javax.swing.JPanel OpcionesPanel;
+    private javax.swing.JPanel TareasCompletadasPanel;
+    private javax.swing.JButton btnEliminaTarea;
+    private javax.swing.JButton btnNuevaTarea;
+    private javax.swing.JButton btnNuevaTarea10;
+    private javax.swing.JButton btnNuevaTarea7;
+    private javax.swing.JButton btnNuevaTarea8;
+    private javax.swing.JButton btnNuevaTarea9;
+    private javax.swing.JButton btnRefrescar1;
+    private javax.swing.JButton btnRefrescar2;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JPanel panelContenedor;
+    private javax.swing.JTable tablaTareas;
+    private javax.swing.JTable tablaTareasCompletadas;
+    private javax.swing.JPanel tareasPanel;
+    private javax.swing.JLabel txtTitulo;
+    private javax.swing.JLabel txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

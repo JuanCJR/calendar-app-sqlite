@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import gestionbd.*;
+import task.Task;
 
 /**
  *
@@ -20,6 +21,9 @@ public class Login extends javax.swing.JFrame {
 
     boolean estadoVisble = false;
     GestionBD gbd = new GestionBD();
+    
+    //Variable global para pasar usuario
+    public static String usuario;
     
     public Login() {
         initComponents();
@@ -31,6 +35,8 @@ public class Login extends javax.swing.JFrame {
         gbd.crearBD();
                
     }
+    
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,8 +50,8 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtfUsuario = new javax.swing.JTextField();
+        txtfPasswd = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         txtRestablecer = new javax.swing.JLabel();
@@ -67,16 +73,16 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 127, 39));
         jLabel2.setText("Contraseña:");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setToolTipText("");
-        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
-        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtfUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtfUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtfUsuario.setToolTipText("");
+        txtfUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
+        txtfUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        jPasswordField1.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jPasswordField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPasswordField1.setToolTipText("");
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
+        txtfPasswd.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        txtfPasswd.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtfPasswd.setToolTipText("");
+        txtfPasswd.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/calenderLogo2.png"))); // NOI18N
 
@@ -167,9 +173,9 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtfPasswd, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jCheckBox1))
                             .addComponent(txtRestablecer))
@@ -187,10 +193,10 @@ public class Login extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtfPasswd, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -230,12 +236,12 @@ public class Login extends javax.swing.JFrame {
         
        if(estadoVisble == false){
             jCheckBox1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/hide1.png")));
-            jPasswordField1.setEchoChar((char)0);
+            txtfPasswd.setEchoChar((char)0);
             estadoVisble = true;
             
        }else{
             jCheckBox1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/visible1.png")));
-            jPasswordField1.setEchoChar('*');
+            txtfPasswd.setEchoChar('*');
             estadoVisble = false;
        }
        
@@ -289,7 +295,13 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRestablecerMouseClicked
 
     private void btnLoginActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+        usuario = txtfUsuario.getText();
+        String passwd = new String(txtfPasswd.getPassword());
+        
+        if(gbd.iniciaSesion(usuario, passwd)){
+            Task task = new Task();
+            task.setVisible(true);
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
@@ -335,8 +347,8 @@ public class Login extends javax.swing.JFrame {
     javax.swing.JLabel jLabel2;
     javax.swing.JLabel jLabel4;
     javax.swing.JPanel jPanel1;
-    javax.swing.JPasswordField jPasswordField1;
-    javax.swing.JTextField jTextField1;
     javax.swing.JLabel txtRestablecer;
+    javax.swing.JPasswordField txtfPasswd;
+    javax.swing.JTextField txtfUsuario;
     // End of variables declaration//GEN-END:variables
 }
