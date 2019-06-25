@@ -64,7 +64,7 @@ public class Task extends javax.swing.JFrame {
         tablaTareas = new javax.swing.JTable();
         btnNuevaTarea = new javax.swing.JButton();
         btnEliminaTarea = new javax.swing.JButton();
-        btnRefrescar1 = new javax.swing.JButton();
+        btnRefrescar = new javax.swing.JButton();
         TareasCompletadasPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaTareasCompletadas = new javax.swing.JTable();
@@ -73,8 +73,8 @@ public class Task extends javax.swing.JFrame {
         btnNuevaTarea7 = new javax.swing.JButton();
         btnNuevaTarea8 = new javax.swing.JButton();
         OpcionesPanel = new javax.swing.JPanel();
-        btnNuevaTarea9 = new javax.swing.JButton();
-        btnNuevaTarea10 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JLabel();
 
@@ -84,7 +84,7 @@ public class Task extends javax.swing.JFrame {
         panelContenedor.setBackground(new java.awt.Color(42, 43, 74));
         panelContenedor.setForeground(new java.awt.Color(42, 43, 74));
 
-        txtTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTitulo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         txtTitulo.setForeground(new java.awt.Color(255, 127, 39));
         txtTitulo.setText("Menu Tareas");
 
@@ -100,6 +100,7 @@ public class Task extends javax.swing.JFrame {
         tareasPanel.setBackground(new java.awt.Color(42, 43, 74));
         tareasPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
         tareasPanel.setForeground(new java.awt.Color(255, 127, 39));
+        tareasPanel.setToolTipText("Tareas Completadas");
         tareasPanel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         tablaTareas.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
@@ -161,24 +162,63 @@ public class Task extends javax.swing.JFrame {
             tablaTareas.getColumnModel().getColumn(6).setPreferredWidth(40);
         }
 
-        btnNuevaTarea.setText("Nueva Tarea");
+        btnNuevaTarea.setBackground(new java.awt.Color(42, 43, 74));
+        btnNuevaTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/add1.png"))); // NOI18N
+        btnNuevaTarea.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnNuevaTarea.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnNuevaTareaMouseMoved(evt);
+            }
+        });
+        btnNuevaTarea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnNuevaTareaMouseExited(evt);
+            }
+        });
         btnNuevaTarea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevaTareaActionPerformed(evt);
             }
         });
 
-        btnEliminaTarea.setText("Eliminar Tarea");
+        btnEliminaTarea.setBackground(new java.awt.Color(42, 43, 74));
+        btnEliminaTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/delete1.png"))); // NOI18N
+        btnEliminaTarea.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEliminaTarea.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnEliminaTareaMouseMoved(evt);
+            }
+        });
+        btnEliminaTarea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEliminaTareaMouseExited(evt);
+            }
+        });
         btnEliminaTarea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminaTareaActionPerformed(evt);
             }
         });
 
-        btnRefrescar1.setText("Refrescar");
-        btnRefrescar1.addActionListener(new java.awt.event.ActionListener() {
+        btnRefrescar.setBackground(new java.awt.Color(42, 43, 74));
+        btnRefrescar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/refresh1.png"))); // NOI18N
+        btnRefrescar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnRefrescar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnRefrescarMouseMoved(evt);
+            }
+        });
+        btnRefrescar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRefrescarMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnRefrescarMousePressed(evt);
+            }
+        });
+        btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefrescar1ActionPerformed(evt);
+                btnRefrescarActionPerformed(evt);
             }
         });
 
@@ -191,11 +231,11 @@ public class Task extends javax.swing.JFrame {
                 .addGroup(tareasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 975, Short.MAX_VALUE)
                     .addGroup(tareasPanelLayout.createSequentialGroup()
-                        .addComponent(btnNuevaTarea)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRefrescar1)
+                        .addComponent(btnNuevaTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRefrescar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminaTarea)))
+                        .addComponent(btnEliminaTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         tareasPanelLayout.setVerticalGroup(
@@ -203,12 +243,13 @@ public class Task extends javax.swing.JFrame {
             .addGroup(tareasPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addGroup(tareasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNuevaTarea)
-                    .addComponent(btnEliminaTarea)
-                    .addComponent(btnRefrescar1))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tareasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(tareasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnNuevaTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEliminaTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/iconos/task2.png")), tareasPanel); // NOI18N
@@ -272,7 +313,19 @@ public class Task extends javax.swing.JFrame {
             tablaTareasCompletadas.getColumnModel().getColumn(6).setPreferredWidth(150);
         }
 
-        btnRefrescar2.setText("Refrescar");
+        btnRefrescar2.setBackground(new java.awt.Color(42, 43, 74));
+        btnRefrescar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/refresh1.png"))); // NOI18N
+        btnRefrescar2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnRefrescar2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnRefrescar2MouseMoved(evt);
+            }
+        });
+        btnRefrescar2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRefrescar2MouseExited(evt);
+            }
+        });
         btnRefrescar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRefrescar2ActionPerformed(evt);
@@ -299,7 +352,7 @@ public class Task extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(btnRefrescar2)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/iconos/task_complete.png")), TareasCompletadasPanel); // NOI18N
@@ -307,6 +360,7 @@ public class Task extends javax.swing.JFrame {
         EstadisticaPanel.setBackground(new java.awt.Color(42, 43, 74));
         EstadisticaPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
         EstadisticaPanel.setForeground(new java.awt.Color(255, 127, 39));
+        EstadisticaPanel.setToolTipText("Estadistica");
         EstadisticaPanel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         btnNuevaTarea7.setText("Nueva Tarea");
@@ -341,7 +395,7 @@ public class Task extends javax.swing.JFrame {
                 .addGroup(EstadisticaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevaTarea7)
                     .addComponent(btnNuevaTarea8))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/iconos/estadistica.png")), EstadisticaPanel); // NOI18N
@@ -349,41 +403,32 @@ public class Task extends javax.swing.JFrame {
         OpcionesPanel.setBackground(new java.awt.Color(42, 43, 74));
         OpcionesPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
         OpcionesPanel.setForeground(new java.awt.Color(255, 127, 39));
+        OpcionesPanel.setToolTipText("Opciones");
         OpcionesPanel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        btnNuevaTarea9.setText("Nueva Tarea");
-        btnNuevaTarea9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevaTarea9ActionPerformed(evt);
-            }
-        });
+        jButton1.setText("Limpiar tareas completadas");
 
-        btnNuevaTarea10.setText("Eliminar Tarea");
-        btnNuevaTarea10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevaTarea10ActionPerformed(evt);
-            }
-        });
+        jButton2.setText("Cambiar Contraseña");
 
         javax.swing.GroupLayout OpcionesPanelLayout = new javax.swing.GroupLayout(OpcionesPanel);
         OpcionesPanel.setLayout(OpcionesPanelLayout);
         OpcionesPanelLayout.setHorizontalGroup(
             OpcionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(OpcionesPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnNuevaTarea9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 781, Short.MAX_VALUE)
-                .addComponent(btnNuevaTarea10)
-                .addContainerGap())
+                .addGap(20, 20, 20)
+                .addGroup(OpcionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addContainerGap(812, Short.MAX_VALUE))
         );
         OpcionesPanelLayout.setVerticalGroup(
             OpcionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(OpcionesPanelLayout.createSequentialGroup()
-                .addGap(360, 360, 360)
-                .addGroup(OpcionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNuevaTarea9)
-                    .addComponent(btnNuevaTarea10))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap(283, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/iconos/settings.png")), OpcionesPanel); // NOI18N
@@ -425,9 +470,9 @@ public class Task extends javax.swing.JFrame {
                             .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtUsuario))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -491,28 +536,66 @@ public class Task extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNuevaTarea8ActionPerformed
 
-    private void btnNuevaTarea9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTarea9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevaTarea9ActionPerformed
-
-    private void btnNuevaTarea10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTarea10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevaTarea10ActionPerformed
-
-    private void btnRefrescar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescar1ActionPerformed
+    private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
         DefaultTableModel modeloTabla =(DefaultTableModel) tablaTareas.getModel();
         modeloTabla.fireTableDataChanged();
         tablaTareas.setModel(Funciones.devuelveModelo());
+        jScrollPane1.setViewportView(tablaTareas);
+        if (tablaTareas.getColumnModel().getColumnCount() > 0) {
+            tablaTareas.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tablaTareas.getColumnModel().getColumn(1).setPreferredWidth(40);
+            tablaTareas.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tablaTareas.getColumnModel().getColumn(3).setPreferredWidth(500);
+            tablaTareas.getColumnModel().getColumn(4).setPreferredWidth(50);
+            tablaTareas.getColumnModel().getColumn(5).setPreferredWidth(40);
+            tablaTareas.getColumnModel().getColumn(6).setPreferredWidth(40);
+        }
         gbd.muestraTareas(tablaTareas, Usuario);
 
         
-    }//GEN-LAST:event_btnRefrescar1ActionPerformed
+    }//GEN-LAST:event_btnRefrescarActionPerformed
 
     private void btnRefrescar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescar2ActionPerformed
         DefaultTableModel modeloTabla2 =(DefaultTableModel) tablaTareasCompletadas.getModel();
         modeloTabla2.fireTableDataChanged();
         gbd.muestraTareasCompletadas(tablaTareasCompletadas, Usuario);
     }//GEN-LAST:event_btnRefrescar2ActionPerformed
+
+    private void btnNuevaTareaMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaTareaMouseMoved
+       Funciones.switchBtnIcon(getClass(), btnNuevaTarea, "add",2);
+    }//GEN-LAST:event_btnNuevaTareaMouseMoved
+
+    private void btnNuevaTareaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaTareaMouseExited
+        Funciones.switchBtnIcon(getClass(), btnNuevaTarea, "add",1);
+    }//GEN-LAST:event_btnNuevaTareaMouseExited
+
+    private void btnRefrescarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescarMouseMoved
+      Funciones.switchBtnIcon(getClass(), btnRefrescar, "refresh", 2);
+    }//GEN-LAST:event_btnRefrescarMouseMoved
+
+    private void btnRefrescarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescarMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRefrescarMousePressed
+
+    private void btnRefrescarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescarMouseExited
+        Funciones.switchBtnIcon(getClass(), btnRefrescar, "refresh", 1);
+    }//GEN-LAST:event_btnRefrescarMouseExited
+
+    private void btnEliminaTareaMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminaTareaMouseMoved
+       Funciones.switchBtnIcon(getClass(), btnEliminaTarea, "delete", 2);
+    }//GEN-LAST:event_btnEliminaTareaMouseMoved
+
+    private void btnEliminaTareaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminaTareaMouseExited
+         Funciones.switchBtnIcon(getClass(), btnEliminaTarea, "delete", 1);
+    }//GEN-LAST:event_btnEliminaTareaMouseExited
+
+    private void btnRefrescar2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescar2MouseMoved
+        Funciones.switchBtnIcon(getClass(), btnRefrescar2, "refresh", 2);
+    }//GEN-LAST:event_btnRefrescar2MouseMoved
+
+    private void btnRefrescar2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescar2MouseExited
+        Funciones.switchBtnIcon(getClass(), btnRefrescar2, "refresh", 1);
+    }//GEN-LAST:event_btnRefrescar2MouseExited
 
     /**
      * @param args the command line arguments
@@ -555,12 +638,12 @@ public class Task extends javax.swing.JFrame {
     private javax.swing.JPanel TareasCompletadasPanel;
     private javax.swing.JButton btnEliminaTarea;
     private javax.swing.JButton btnNuevaTarea;
-    private javax.swing.JButton btnNuevaTarea10;
     private javax.swing.JButton btnNuevaTarea7;
     private javax.swing.JButton btnNuevaTarea8;
-    private javax.swing.JButton btnNuevaTarea9;
-    private javax.swing.JButton btnRefrescar1;
+    private javax.swing.JButton btnRefrescar;
     private javax.swing.JButton btnRefrescar2;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;

@@ -40,8 +40,11 @@ public class IconRenderer extends DefaultTableCellRenderer {
         if(value instanceof JLabel){
             
             JLabel lbl = (JLabel)value;
+            
             return lbl;
+            
         }
+        
         return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); //To change body of generated methods, choose Tools | Templates.
     }
       
