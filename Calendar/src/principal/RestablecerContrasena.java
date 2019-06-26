@@ -62,7 +62,6 @@ public class RestablecerContrasena extends javax.swing.JFrame {
         txtfCodigo = new javax.swing.JTextField();
         txtfPasswd = new javax.swing.JPasswordField();
         txtfConfirmaPasswd = new javax.swing.JPasswordField();
-        btnMail = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         btnAceptar = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
@@ -127,24 +126,6 @@ public class RestablecerContrasena extends javax.swing.JFrame {
         txtfConfirmaPasswd.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
         txtfConfirmaPasswd.setEnabled(false);
 
-        btnMail.setBackground(new java.awt.Color(42, 43, 74));
-        btnMail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/send1.png"))); // NOI18N
-        btnMail.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                btnMailMouseMoved(evt);
-            }
-        });
-        btnMail.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnMailMouseExited(evt);
-            }
-        });
-        btnMail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMailActionPerformed(evt);
-            }
-        });
-
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logoSoloPequeño.png"))); // NOI18N
 
         btnAceptar.setBackground(new java.awt.Color(42, 43, 74));
@@ -207,9 +188,7 @@ public class RestablecerContrasena extends javax.swing.JFrame {
                             .addComponent(txtfPasswd, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtfConfirmaPasswd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnMail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAceptar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1)))
@@ -225,14 +204,11 @@ public class RestablecerContrasena extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(txtfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btnMail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(txtfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(7, 7, 7)
@@ -268,14 +244,6 @@ public class RestablecerContrasena extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnMailMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMailMouseMoved
-     Funciones.switchBtnIcon(getClass(), btnMail,"send",2);
-    }//GEN-LAST:event_btnMailMouseMoved
-
-    private void btnMailMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMailMouseExited
-        Funciones.switchBtnIcon(getClass(), btnMail, "send", 1);
-    }//GEN-LAST:event_btnMailMouseExited
-
     private void btnAceptarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseMoved
         Funciones.switchBtnIcon(getClass(), btnAceptar, "login",2);
     }//GEN-LAST:event_btnAceptarMouseMoved
@@ -283,22 +251,6 @@ public class RestablecerContrasena extends javax.swing.JFrame {
     private void btnAceptarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseExited
         Funciones.switchBtnIcon(getClass(), btnAceptar, "login",1);
     }//GEN-LAST:event_btnAceptarMouseExited
-
-    private void btnMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMailActionPerformed
-       
-        String Usuario = txtfUsuario.getText();
-        String email = gbd.getCorreo(Usuario);
-        codidoVerificacion =   Mail.sendEmail(email);
-        
-        
-        
-        
-
-        
-      
-        
-        
-    }//GEN-LAST:event_btnMailActionPerformed
 
     private void txtfCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfCodigoKeyReleased
 
@@ -394,7 +346,6 @@ public class RestablecerContrasena extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnAtras;
-    private javax.swing.JButton btnMail;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

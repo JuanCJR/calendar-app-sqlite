@@ -176,6 +176,7 @@ public class Task extends javax.swing.JFrame {
 
         btnNuevaTarea.setBackground(new java.awt.Color(42, 43, 74));
         btnNuevaTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/add1.png"))); // NOI18N
+        btnNuevaTarea.setToolTipText("Agregar Tarea");
         btnNuevaTarea.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnNuevaTarea.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -195,6 +196,7 @@ public class Task extends javax.swing.JFrame {
 
         btnEliminaTarea.setBackground(new java.awt.Color(42, 43, 74));
         btnEliminaTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/delete1.png"))); // NOI18N
+        btnEliminaTarea.setToolTipText("Eliminar Tarea");
         btnEliminaTarea.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEliminaTarea.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -214,6 +216,7 @@ public class Task extends javax.swing.JFrame {
 
         btnRefrescar.setBackground(new java.awt.Color(42, 43, 74));
         btnRefrescar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/refresh1.png"))); // NOI18N
+        btnRefrescar.setToolTipText("Refrescar");
         btnRefrescar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRefrescar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -327,6 +330,7 @@ public class Task extends javax.swing.JFrame {
 
         btnRefrescar2.setBackground(new java.awt.Color(42, 43, 74));
         btnRefrescar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/refresh1.png"))); // NOI18N
+        btnRefrescar2.setToolTipText("Refrescar");
         btnRefrescar2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRefrescar2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -380,6 +384,7 @@ public class Task extends javax.swing.JFrame {
 
         btnExit.setBackground(new java.awt.Color(42, 43, 74));
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/exit1.png"))); // NOI18N
+        btnExit.setToolTipText("Cerrar Sesion");
         btnExit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnExit.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -397,7 +402,10 @@ public class Task extends javax.swing.JFrame {
             }
         });
 
-        btnIntegrantes.setText("jButton1");
+        btnIntegrantes.setBackground(new java.awt.Color(42, 43, 74));
+        btnIntegrantes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/user.png"))); // NOI18N
+        btnIntegrantes.setToolTipText("Integrantes");
+        btnIntegrantes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnIntegrantes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIntegrantesActionPerformed(evt);
