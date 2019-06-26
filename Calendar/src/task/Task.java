@@ -81,10 +81,12 @@ public class Task extends javax.swing.JFrame {
         btnNuevaTarea = new javax.swing.JButton();
         btnEliminaTarea = new javax.swing.JButton();
         btnRefrescar = new javax.swing.JButton();
+        txtTitulo2 = new javax.swing.JLabel();
         TareasCompletadasPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaTareasCompletadas = new javax.swing.JTable();
         btnRefrescar2 = new javax.swing.JButton();
+        txtTitulo1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
@@ -237,6 +239,10 @@ public class Task extends javax.swing.JFrame {
             }
         });
 
+        txtTitulo2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTitulo2.setForeground(new java.awt.Color(255, 127, 39));
+        txtTitulo2.setText("Tareas");
+
         javax.swing.GroupLayout tareasPanelLayout = new javax.swing.GroupLayout(tareasPanel);
         tareasPanel.setLayout(tareasPanelLayout);
         tareasPanelLayout.setHorizontalGroup(
@@ -250,21 +256,24 @@ public class Task extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRefrescar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminaTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnEliminaTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tareasPanelLayout.createSequentialGroup()
+                        .addComponent(txtTitulo2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         tareasPanelLayout.setVerticalGroup(
             tareasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tareasPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(txtTitulo2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(tareasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(tareasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnNuevaTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnEliminaTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(tareasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRefrescar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNuevaTarea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminaTarea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/iconos/task2.png")), tareasPanel); // NOI18N
@@ -348,6 +357,10 @@ public class Task extends javax.swing.JFrame {
             }
         });
 
+        txtTitulo1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTitulo1.setForeground(new java.awt.Color(255, 127, 39));
+        txtTitulo1.setText("Tareas Completadas");
+
         javax.swing.GroupLayout TareasCompletadasPanelLayout = new javax.swing.GroupLayout(TareasCompletadasPanel);
         TareasCompletadasPanel.setLayout(TareasCompletadasPanelLayout);
         TareasCompletadasPanelLayout.setHorizontalGroup(
@@ -357,18 +370,21 @@ public class Task extends javax.swing.JFrame {
                 .addGroup(TareasCompletadasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 975, Short.MAX_VALUE)
                     .addGroup(TareasCompletadasPanelLayout.createSequentialGroup()
-                        .addComponent(btnRefrescar2)
+                        .addGroup(TareasCompletadasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRefrescar2)
+                            .addComponent(txtTitulo1))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         TareasCompletadasPanelLayout.setVerticalGroup(
             TareasCompletadasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TareasCompletadasPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(txtTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addGap(18, 18, 18)
                 .addComponent(btnRefrescar2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/iconos/task_complete.png")), TareasCompletadasPanel); // NOI18N
@@ -450,8 +466,7 @@ public class Task extends javax.swing.JFrame {
                             .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtUsuario))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 13, Short.MAX_VALUE))
+                        .addComponent(jTabbedPane1))
                     .addGroup(panelContenedorLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -469,7 +484,7 @@ public class Task extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -488,20 +503,6 @@ public class Task extends javax.swing.JFrame {
         Login l = new Login();
         l.setVisible(true);
     }//GEN-LAST:event_btnExitActionPerformed
-
-    private void btnRefrescar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescar2ActionPerformed
-        DefaultTableModel modeloTabla2 =(DefaultTableModel) tablaTareasCompletadas.getModel();
-        modeloTabla2.fireTableDataChanged();
-        gbd.muestraTareasCompletadas(tablaTareasCompletadas, Usuario);
-    }//GEN-LAST:event_btnRefrescar2ActionPerformed
-
-    private void btnRefrescar2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescar2MouseExited
-        Funciones.switchBtnIcon(getClass(), btnRefrescar2, "refresh", 1);
-    }//GEN-LAST:event_btnRefrescar2MouseExited
-
-    private void btnRefrescar2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescar2MouseMoved
-        Funciones.switchBtnIcon(getClass(), btnRefrescar2, "refresh", 2);
-    }//GEN-LAST:event_btnRefrescar2MouseMoved
 
     private void tablaTareasCompletadasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaTareasCompletadasKeyReleased
         // TODO add your handling code here:
@@ -590,6 +591,20 @@ public class Task extends javax.swing.JFrame {
       i.setVisible(true);
     }//GEN-LAST:event_btnIntegrantesActionPerformed
 
+    private void btnRefrescar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescar2ActionPerformed
+        DefaultTableModel modeloTabla2 =(DefaultTableModel) tablaTareasCompletadas.getModel();
+        modeloTabla2.fireTableDataChanged();
+        gbd.muestraTareasCompletadas(tablaTareasCompletadas, Usuario);
+    }//GEN-LAST:event_btnRefrescar2ActionPerformed
+
+    private void btnRefrescar2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescar2MouseExited
+        Funciones.switchBtnIcon(getClass(), btnRefrescar2, "refresh", 1);
+    }//GEN-LAST:event_btnRefrescar2MouseExited
+
+    private void btnRefrescar2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescar2MouseMoved
+        Funciones.switchBtnIcon(getClass(), btnRefrescar2, "refresh", 2);
+    }//GEN-LAST:event_btnRefrescar2MouseMoved
+
     /**
      * @param args the command line arguments
      */
@@ -642,6 +657,8 @@ public class Task extends javax.swing.JFrame {
     private javax.swing.JTable tablaTareasCompletadas;
     private javax.swing.JPanel tareasPanel;
     private javax.swing.JLabel txtTitulo;
+    private javax.swing.JLabel txtTitulo1;
+    private javax.swing.JLabel txtTitulo2;
     private javax.swing.JLabel txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
