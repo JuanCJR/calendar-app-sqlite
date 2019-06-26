@@ -59,6 +59,8 @@ public class Splash extends javax.swing.JFrame {
         t.start();
         
         
+        
+        
                 
     }
     public void mostrarVentana(){
