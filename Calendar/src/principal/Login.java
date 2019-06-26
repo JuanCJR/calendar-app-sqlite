@@ -308,7 +308,9 @@ public class Login extends javax.swing.JFrame {
 
     private void txtRestablecerMouseClicked(MouseEvent evt) {//GEN-FIRST:event_txtRestablecerMouseClicked
         RestablecerContrasena RS = new RestablecerContrasena();
+    
         RS.setVisible(true);
+          this.dispose();
     }//GEN-LAST:event_txtRestablecerMouseClicked
 
     private void btnLoginActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed

@@ -28,6 +28,7 @@ import funciones.*;
 import gestionbd.GestionBD;
 import java.awt.LayoutManager;
 import java.util.Arrays;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
@@ -41,6 +42,10 @@ public class Task extends javax.swing.JFrame {
     
     public Task() {
         initComponents();
+        ImageIcon iconoApp = new javax.swing.ImageIcon(getClass().getResource("/imagenes/logoSolo.png"));
+        this.setTitle("Calendar");
+        this.setLocationRelativeTo(null);
+        this.setIconImage(iconoApp.getImage());
         tablaTareas.setDefaultRenderer(Object.class,new IconRenderer());
         tablaTareasCompletadas.setDefaultRenderer(Object.class,new IconRenderer());
         
@@ -84,12 +89,6 @@ public class Task extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaTareasCompletadas = new javax.swing.JTable();
         btnRefrescar2 = new javax.swing.JButton();
-        EstadisticaPanel = new javax.swing.JPanel();
-        btnNuevaTarea7 = new javax.swing.JButton();
-        btnNuevaTarea8 = new javax.swing.JButton();
-        OpcionesPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
@@ -373,82 +372,6 @@ public class Task extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/iconos/task_complete.png")), TareasCompletadasPanel); // NOI18N
 
-        EstadisticaPanel.setBackground(new java.awt.Color(42, 43, 74));
-        EstadisticaPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
-        EstadisticaPanel.setForeground(new java.awt.Color(255, 127, 39));
-        EstadisticaPanel.setToolTipText("Estadistica");
-        EstadisticaPanel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        btnNuevaTarea7.setText("Nueva Tarea");
-        btnNuevaTarea7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevaTarea7ActionPerformed(evt);
-            }
-        });
-
-        btnNuevaTarea8.setText("Eliminar Tarea");
-        btnNuevaTarea8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevaTarea8ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout EstadisticaPanelLayout = new javax.swing.GroupLayout(EstadisticaPanel);
-        EstadisticaPanel.setLayout(EstadisticaPanelLayout);
-        EstadisticaPanelLayout.setHorizontalGroup(
-            EstadisticaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EstadisticaPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnNuevaTarea7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 781, Short.MAX_VALUE)
-                .addComponent(btnNuevaTarea8)
-                .addContainerGap())
-        );
-        EstadisticaPanelLayout.setVerticalGroup(
-            EstadisticaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EstadisticaPanelLayout.createSequentialGroup()
-                .addGap(360, 360, 360)
-                .addGroup(EstadisticaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNuevaTarea7)
-                    .addComponent(btnNuevaTarea8))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/iconos/estadistica.png")), EstadisticaPanel); // NOI18N
-
-        OpcionesPanel.setBackground(new java.awt.Color(42, 43, 74));
-        OpcionesPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
-        OpcionesPanel.setForeground(new java.awt.Color(255, 127, 39));
-        OpcionesPanel.setToolTipText("Opciones");
-        OpcionesPanel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        jButton1.setText("Limpiar tareas completadas");
-
-        jButton2.setText("Cambiar Contraseña");
-
-        javax.swing.GroupLayout OpcionesPanelLayout = new javax.swing.GroupLayout(OpcionesPanel);
-        OpcionesPanel.setLayout(OpcionesPanelLayout);
-        OpcionesPanelLayout.setHorizontalGroup(
-            OpcionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(OpcionesPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(OpcionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addContainerGap(812, Short.MAX_VALUE))
-        );
-        OpcionesPanelLayout.setVerticalGroup(
-            OpcionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(OpcionesPanelLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(283, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("", new javax.swing.ImageIcon(getClass().getResource("/iconos/settings.png")), OpcionesPanel); // NOI18N
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 127, 39));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logoSoloPequeño.png"))); // NOI18N
@@ -497,7 +420,6 @@ public class Task extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContenedorLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20))))
         );
@@ -534,52 +456,37 @@ public class Task extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNuevaTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTareaActionPerformed
-       NuevaTarea nt = new NuevaTarea();
-       nt.setVisible(true);
-       
-        gbd.muestraTareas(tablaTareas, Usuario);
-    }//GEN-LAST:event_btnNuevaTareaActionPerformed
+    private void btnExitMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseMoved
+       Funciones.switchBtnIcon(getClass(), btnExit, "exit",2);
+    }//GEN-LAST:event_btnExitMouseMoved
 
-    private void tablaTareasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaTareasKeyReleased
+    private void btnExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseExited
+       Funciones.switchBtnIcon(getClass(), btnExit, "exit",1);
+    }//GEN-LAST:event_btnExitMouseExited
 
-        //Codigo para detectar celdas modificadas en la tabla
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            DefaultTableModel modeloTabla =(DefaultTableModel) tablaTareas.getModel();
-            int  nro_tarea = (int)modeloTabla.getValueAt(tablaTareas.getSelectedRow(),0);
-            
-            String Campo = tablaTareas.getColumnName(tablaTareas.getSelectedColumn());
-            
-            String  celdaModificada = (String)tablaTareas.getValueAt(tablaTareas.getSelectedRow(),tablaTareas.getSelectedColumn()).toString();
-            
-            gbd.ActualizaTarea(Campo,celdaModificada, nro_tarea);
-            
-        }
-    }//GEN-LAST:event_tablaTareasKeyReleased
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        this.dispose();
+        Login l = new Login();
+        l.setVisible(true);
+    }//GEN-LAST:event_btnExitActionPerformed
 
-    private void btnEliminaTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaTareaActionPerformed
-        
-        DefaultTableModel modeloTabla =(DefaultTableModel) tablaTareas.getModel();
-        int  nro_tarea = (int)modeloTabla.getValueAt(tablaTareas.getSelectedRow(),0);
-        gbd.EliminaTarea(nro_tarea);
-        modeloTabla.removeRow(tablaTareas.getSelectedRow());
-       
-        
-        
-        
-    }//GEN-LAST:event_btnEliminaTareaActionPerformed
+    private void btnRefrescar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescar2ActionPerformed
+        DefaultTableModel modeloTabla2 =(DefaultTableModel) tablaTareasCompletadas.getModel();
+        modeloTabla2.fireTableDataChanged();
+        gbd.muestraTareasCompletadas(tablaTareasCompletadas, Usuario);
+    }//GEN-LAST:event_btnRefrescar2ActionPerformed
+
+    private void btnRefrescar2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescar2MouseExited
+        Funciones.switchBtnIcon(getClass(), btnRefrescar2, "refresh", 1);
+    }//GEN-LAST:event_btnRefrescar2MouseExited
+
+    private void btnRefrescar2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescar2MouseMoved
+        Funciones.switchBtnIcon(getClass(), btnRefrescar2, "refresh", 2);
+    }//GEN-LAST:event_btnRefrescar2MouseMoved
 
     private void tablaTareasCompletadasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaTareasCompletadasKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_tablaTareasCompletadasKeyReleased
-
-    private void btnNuevaTarea7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTarea7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevaTarea7ActionPerformed
-
-    private void btnNuevaTarea8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTarea8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevaTarea8ActionPerformed
 
     private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
         DefaultTableModel modeloTabla =(DefaultTableModel) tablaTareas.getModel();
@@ -597,26 +504,7 @@ public class Task extends javax.swing.JFrame {
         }
         gbd.muestraTareas(tablaTareas, Usuario);
 
-        
     }//GEN-LAST:event_btnRefrescarActionPerformed
-
-    private void btnRefrescar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescar2ActionPerformed
-        DefaultTableModel modeloTabla2 =(DefaultTableModel) tablaTareasCompletadas.getModel();
-        modeloTabla2.fireTableDataChanged();
-        gbd.muestraTareasCompletadas(tablaTareasCompletadas, Usuario);
-    }//GEN-LAST:event_btnRefrescar2ActionPerformed
-
-    private void btnNuevaTareaMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaTareaMouseMoved
-       Funciones.switchBtnIcon(getClass(), btnNuevaTarea, "add",2);
-    }//GEN-LAST:event_btnNuevaTareaMouseMoved
-
-    private void btnNuevaTareaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaTareaMouseExited
-        Funciones.switchBtnIcon(getClass(), btnNuevaTarea, "add",1);
-    }//GEN-LAST:event_btnNuevaTareaMouseExited
-
-    private void btnRefrescarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescarMouseMoved
-      Funciones.switchBtnIcon(getClass(), btnRefrescar, "refresh", 2);
-    }//GEN-LAST:event_btnRefrescarMouseMoved
 
     private void btnRefrescarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescarMousePressed
         // TODO add your handling code here:
@@ -626,35 +514,57 @@ public class Task extends javax.swing.JFrame {
         Funciones.switchBtnIcon(getClass(), btnRefrescar, "refresh", 1);
     }//GEN-LAST:event_btnRefrescarMouseExited
 
-    private void btnEliminaTareaMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminaTareaMouseMoved
-       Funciones.switchBtnIcon(getClass(), btnEliminaTarea, "delete", 2);
-    }//GEN-LAST:event_btnEliminaTareaMouseMoved
+    private void btnRefrescarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescarMouseMoved
+        Funciones.switchBtnIcon(getClass(), btnRefrescar, "refresh", 2);
+    }//GEN-LAST:event_btnRefrescarMouseMoved
+
+    private void btnEliminaTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaTareaActionPerformed
+
+        DefaultTableModel modeloTabla =(DefaultTableModel) tablaTareas.getModel();
+        int  nro_tarea = (int)modeloTabla.getValueAt(tablaTareas.getSelectedRow(),0);
+        gbd.EliminaTarea(nro_tarea);
+        modeloTabla.removeRow(tablaTareas.getSelectedRow());
+
+    }//GEN-LAST:event_btnEliminaTareaActionPerformed
 
     private void btnEliminaTareaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminaTareaMouseExited
-         Funciones.switchBtnIcon(getClass(), btnEliminaTarea, "delete", 1);
+        Funciones.switchBtnIcon(getClass(), btnEliminaTarea, "delete", 1);
     }//GEN-LAST:event_btnEliminaTareaMouseExited
 
-    private void btnRefrescar2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescar2MouseMoved
-        Funciones.switchBtnIcon(getClass(), btnRefrescar2, "refresh", 2);
-    }//GEN-LAST:event_btnRefrescar2MouseMoved
+    private void btnEliminaTareaMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminaTareaMouseMoved
+        Funciones.switchBtnIcon(getClass(), btnEliminaTarea, "delete", 2);
+    }//GEN-LAST:event_btnEliminaTareaMouseMoved
 
-    private void btnRefrescar2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescar2MouseExited
-        Funciones.switchBtnIcon(getClass(), btnRefrescar2, "refresh", 1);
-    }//GEN-LAST:event_btnRefrescar2MouseExited
+    private void btnNuevaTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTareaActionPerformed
+        NuevaTarea nt = new NuevaTarea();
+        nt.setVisible(true);
 
-    private void btnExitMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseMoved
-       Funciones.switchBtnIcon(getClass(), btnExit, "exit",2);
-    }//GEN-LAST:event_btnExitMouseMoved
+        gbd.muestraTareas(tablaTareas, Usuario);
+    }//GEN-LAST:event_btnNuevaTareaActionPerformed
 
-    private void btnExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseExited
-       Funciones.switchBtnIcon(getClass(), btnExit, "exit",1);
-    }//GEN-LAST:event_btnExitMouseExited
+    private void btnNuevaTareaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaTareaMouseExited
+        Funciones.switchBtnIcon(getClass(), btnNuevaTarea, "add",1);
+    }//GEN-LAST:event_btnNuevaTareaMouseExited
 
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        this.dispose();
-        Login l = new Login();
-        l.setVisible(true);
-    }//GEN-LAST:event_btnExitActionPerformed
+    private void btnNuevaTareaMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaTareaMouseMoved
+        Funciones.switchBtnIcon(getClass(), btnNuevaTarea, "add",2);
+    }//GEN-LAST:event_btnNuevaTareaMouseMoved
+
+    private void tablaTareasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaTareasKeyReleased
+
+        //Codigo para detectar celdas modificadas en la tabla
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            DefaultTableModel modeloTabla =(DefaultTableModel) tablaTareas.getModel();
+            int  nro_tarea = (int)modeloTabla.getValueAt(tablaTareas.getSelectedRow(),0);
+
+            String Campo = tablaTareas.getColumnName(tablaTareas.getSelectedColumn());
+
+            String  celdaModificada = (String)tablaTareas.getValueAt(tablaTareas.getSelectedRow(),tablaTareas.getSelectedColumn()).toString();
+
+            gbd.ActualizaTarea(Campo,celdaModificada, nro_tarea);
+
+        }
+    }//GEN-LAST:event_tablaTareasKeyReleased
 
     /**
      * @param args the command line arguments
@@ -692,18 +602,12 @@ public class Task extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel EstadisticaPanel;
-    private javax.swing.JPanel OpcionesPanel;
     private javax.swing.JPanel TareasCompletadasPanel;
     private javax.swing.JButton btnEliminaTarea;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnNuevaTarea;
-    private javax.swing.JButton btnNuevaTarea7;
-    private javax.swing.JButton btnNuevaTarea8;
     private javax.swing.JButton btnRefrescar;
     private javax.swing.JButton btnRefrescar2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
