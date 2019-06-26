@@ -32,6 +32,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import principal.Integrantes;
 import principal.Login;
 
 
@@ -54,17 +55,12 @@ public class Task extends javax.swing.JFrame {
         gbd.muestraTareasCompletadas(tablaTareasCompletadas, Usuario);
         txtUsuario.setText("Usuario: " + Usuario);
         
-//        MyRenderer mr = new MyRenderer();
-//        tablaTareas.setDefaultRenderer(Object.class,mr);
-        
-               
-//        Panel p = new Panel();
-//        Panel p2 = new Panel();
-//        jTabbedPane1.add("otro",p.agregaComponentes());
-//
-//        jTabbedPane1.add("otro2",p2.agregaComponentes());
-        
+
         txtUsuario.setText("Usuario: " + Usuario);
+        
+        
+        
+        
     }
 
     /**
@@ -92,6 +88,7 @@ public class Task extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
+        btnIntegrantes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -400,6 +397,13 @@ public class Task extends javax.swing.JFrame {
             }
         });
 
+        btnIntegrantes.setText("jButton1");
+        btnIntegrantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIntegrantesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelContenedorLayout = new javax.swing.GroupLayout(panelContenedor);
         panelContenedor.setLayout(panelContenedorLayout);
         panelContenedorLayout.setHorizontalGroup(
@@ -420,8 +424,13 @@ public class Task extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContenedorLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))))
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContenedorLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnIntegrantes)
+                        .addGap(30, 30, 30))))
         );
         panelContenedorLayout.setVerticalGroup(
             panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,6 +447,8 @@ public class Task extends javax.swing.JFrame {
                     .addGroup(panelContenedorLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnIntegrantes)
+                        .addGap(77, 77, 77)
                         .addComponent(btnExit)))
                 .addContainerGap())
         );
@@ -566,6 +577,11 @@ public class Task extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tablaTareasKeyReleased
 
+    private void btnIntegrantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntegrantesActionPerformed
+      Integrantes i = new Integrantes();
+      i.setVisible(true);
+    }//GEN-LAST:event_btnIntegrantesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -605,6 +621,7 @@ public class Task extends javax.swing.JFrame {
     private javax.swing.JPanel TareasCompletadasPanel;
     private javax.swing.JButton btnEliminaTarea;
     private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnIntegrantes;
     private javax.swing.JButton btnNuevaTarea;
     private javax.swing.JButton btnRefrescar;
     private javax.swing.JButton btnRefrescar2;
