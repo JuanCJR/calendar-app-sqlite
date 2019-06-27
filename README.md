@@ -1,2 +1,4 @@
 # calender-app-sqlite
-Repositorio de aplicativo Calender. Aplicacion para el registro de tareas diarias, recordatorios y registros de gastos personales.
+CALENDAR
+
+Aplicativo para el registro y control de actividades dirias del usuario, sea personales, laborales o estudio :astonished::astonished::astonished::astonished::astonished::astonished:
