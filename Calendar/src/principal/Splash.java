@@ -58,8 +58,7 @@ public class Splash extends javax.swing.JFrame {
         this.setIconImage(iconoApp.getImage());
         t.start();
         
-        
-        
+       
         
                 
     }
