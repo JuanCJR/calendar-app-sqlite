@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2019 jotac.
+ * Copyright 2019 Juan Jimenez, Marco Avila.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,12 +29,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import principal.Login;
 
-/**
- *
- * @author jotac
- */
+
 public class NuevaTarea extends javax.swing.JFrame {
     
         GestionBD gbd = new GestionBD();
@@ -42,6 +40,10 @@ public class NuevaTarea extends javax.swing.JFrame {
         
     public NuevaTarea() {
         initComponents();
+         ImageIcon iconoApp = new javax.swing.ImageIcon(getClass().getResource("/imagenes/logoSolo.png"));
+        this.setTitle("Calendar");
+        this.setLocationRelativeTo(null);
+        this.setIconImage(iconoApp.getImage());
         
         ConfigurarRB();
         String tipoTareas [] = gbd.getTipoTareas();
@@ -95,7 +97,7 @@ public class NuevaTarea extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         cbTipoTarea = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         NuevaTareaPanel.setBackground(new java.awt.Color(42, 43, 74));
         NuevaTareaPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));

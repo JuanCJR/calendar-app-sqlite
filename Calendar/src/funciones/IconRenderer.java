@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2019 jotac.
+ * Copyright 2019 Juan Jimenez, Marco Avila.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,10 +29,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-/**
- *
- * @author jotac
- */
+
 public class IconRenderer extends DefaultTableCellRenderer {
 
     @Override

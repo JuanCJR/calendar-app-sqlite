@@ -1,18 +1,44 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The MIT License
+ *
+ * Copyright 2019 Juan Jimenez, Marco Avila.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package principal;
+import com.sun.glass.events.KeyEvent;
 import funciones.*;
+import gestionbd.GestionBD;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class RestablecerContrasena extends javax.swing.JFrame {
 
-    /**
-     * Creates new form RestablecerContrasena
-     */
+    GestionBD gbd = new GestionBD();
+    int codidoVerificacion;
     public RestablecerContrasena() {
         initComponents();
+        
+         ImageIcon iconoApp = new javax.swing.ImageIcon(getClass().getResource("/imagenes/logoSolo.png"));
+        this.setTitle("Calendar");
+        this.setLocationRelativeTo(null);
+        this.setIconImage(iconoApp.getImage());
     }
 
     /**
@@ -32,20 +58,21 @@ public class RestablecerContrasena extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        txtfUsuario = new javax.swing.JTextField();
+        txtfCodigo = new javax.swing.JTextField();
+        txtfPasswd = new javax.swing.JPasswordField();
+        txtfConfirmaPasswd = new javax.swing.JPasswordField();
         btnMail = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        btnLogin = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
+        btnAtras = new javax.swing.JButton();
 
         jToggleButton1.setText("jToggleButton1");
 
         jButton1.setText("jButton1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setType(java.awt.Window.Type.UTILITY);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(42, 43, 74));
         jPanel1.setEnabled(false);
@@ -71,30 +98,34 @@ public class RestablecerContrasena extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 127, 39));
         jLabel6.setText("Usuario:");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setToolTipText("");
-        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
-        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtfUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtfUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtfUsuario.setToolTipText("");
+        txtfUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
+        txtfUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.setToolTipText("");
-        jTextField2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
-        jTextField2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jTextField2.setEnabled(false);
+        txtfCodigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtfCodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtfCodigo.setToolTipText("");
+        txtfCodigo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
+        txtfCodigo.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtfCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtfCodigoKeyReleased(evt);
+            }
+        });
 
-        jPasswordField1.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jPasswordField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPasswordField1.setToolTipText("");
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
-        jPasswordField1.setEnabled(false);
+        txtfPasswd.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        txtfPasswd.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtfPasswd.setToolTipText("");
+        txtfPasswd.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
+        txtfPasswd.setEnabled(false);
 
-        jPasswordField2.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jPasswordField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPasswordField2.setToolTipText("");
-        jPasswordField2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
-        jPasswordField2.setEnabled(false);
+        txtfConfirmaPasswd.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        txtfConfirmaPasswd.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtfConfirmaPasswd.setToolTipText("");
+        txtfConfirmaPasswd.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 127, 39)));
+        txtfConfirmaPasswd.setEnabled(false);
 
         btnMail.setBackground(new java.awt.Color(42, 43, 74));
         btnMail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/send1.png"))); // NOI18N
@@ -116,16 +147,40 @@ public class RestablecerContrasena extends javax.swing.JFrame {
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logoSoloPequeño.png"))); // NOI18N
 
-        btnLogin.setBackground(new java.awt.Color(42, 43, 74));
-        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/login1.png"))); // NOI18N
-        btnLogin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        btnAceptar.setBackground(new java.awt.Color(42, 43, 74));
+        btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/login1.png"))); // NOI18N
+        btnAceptar.setEnabled(false);
+        btnAceptar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                btnLoginMouseMoved(evt);
+                btnAceptarMouseMoved(evt);
             }
         });
-        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnLoginMouseExited(evt);
+                btnAceptarMouseExited(evt);
+            }
+        });
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
+
+        btnAtras.setBackground(new java.awt.Color(42, 43, 74));
+        btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/back1.png"))); // NOI18N
+        btnAtras.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnAtrasMouseMoved(evt);
+            }
+        });
+        btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAtrasMouseExited(evt);
+            }
+        });
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
             }
         });
 
@@ -135,7 +190,9 @@ public class RestablecerContrasena extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,14 +202,14 @@ public class RestablecerContrasena extends javax.swing.JFrame {
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfPasswd, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtfConfirmaPasswd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnMail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnAceptar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1)))
@@ -163,34 +220,38 @@ public class RestablecerContrasena extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel6)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(btnMail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(7, 7, 7)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(8, 8, 8)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2)
-                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtfPasswd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel5)
-                                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtfConfirmaPasswd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(76, 76, 76)
-                                .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
+                .addGap(7, 7, 7))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,30 +268,85 @@ public class RestablecerContrasena extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnMailMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMailMouseMoved
-     Funciones.switchBtnIcon(getClass(), btnMail,"send",2);
-    }//GEN-LAST:event_btnMailMouseMoved
+    private void btnAceptarMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseMoved
+        Funciones.switchBtnIcon(getClass(), btnAceptar, "login",2);
+    }//GEN-LAST:event_btnAceptarMouseMoved
+
+    private void btnAceptarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseExited
+        Funciones.switchBtnIcon(getClass(), btnAceptar, "login",1);
+    }//GEN-LAST:event_btnAceptarMouseExited
+
+    private void txtfCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtfCodigoKeyReleased
+
+        ImageIcon img = new ImageIcon(getClass().getResource("/iconos/warning2.png")); 
+        
+                if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+
+                    if (codidoVerificacion == Integer.parseInt(txtfCodigo.getText())){
+        
+                      txtfConfirmaPasswd.setEnabled(true);
+                      txtfPasswd.setEnabled(true);
+                      btnAceptar.setEnabled(true);
+        
+            
+                     }else{
+                      JOptionPane.showMessageDialog(null,"El codigo de verificacion es incorrecto","Error",JOptionPane.ERROR_MESSAGE, img);
+                     }
+                }
+        
+    }//GEN-LAST:event_txtfCodigoKeyReleased
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+       ImageIcon img = new ImageIcon(getClass().getResource("/iconos/warning2.png"));
+       ImageIcon img2 = new ImageIcon(getClass().getResource("/iconos/ok2.png"));
+        String Usuario = txtfUsuario.getText();
+        String passwd = new String(txtfPasswd.getPassword());
+        String ConfirmaPasswd = new String(txtfConfirmaPasswd.getPassword());
+        
+        if(Funciones.validaContraseña(passwd, ConfirmaPasswd)){
+            gbd.ActualizaContraseña(Usuario, passwd);
+              JOptionPane.showMessageDialog(null,"Las contraseñas ha sido cambiada","Error",JOptionPane.OK_OPTION, img2);
+              
+              Login l = new Login();
+              l.setVisible(true);
+              this.dispose();
+        }else{
+               JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden","Error",JOptionPane.ERROR_MESSAGE, img);
+               txtfPasswd.setText("");
+               txtfConfirmaPasswd.setText("");
+        
+        }
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void btnAtrasMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseMoved
+        Funciones.switchBtnIcon(getClass(),btnAtras,"back",2);
+    }//GEN-LAST:event_btnAtrasMouseMoved
+
+    private void btnAtrasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseExited
+       Funciones.switchBtnIcon(getClass(),btnAtras,"back",1);
+    }//GEN-LAST:event_btnAtrasMouseExited
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        Login l = new Login();
+        l.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void btnMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMailActionPerformed
+
+        String Usuario = txtfUsuario.getText();
+        String email = gbd.getCorreo(Usuario);
+        codidoVerificacion =   Mail.sendEmail(email);
+
+    }//GEN-LAST:event_btnMailActionPerformed
 
     private void btnMailMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMailMouseExited
         Funciones.switchBtnIcon(getClass(), btnMail, "send", 1);
     }//GEN-LAST:event_btnMailMouseExited
 
-    private void btnLoginMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseMoved
-        Funciones.switchBtnIcon(getClass(), btnLogin, "login",2);
-    }//GEN-LAST:event_btnLoginMouseMoved
-
-    private void btnLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseExited
-        Funciones.switchBtnIcon(getClass(), btnLogin, "login",1);
-    }//GEN-LAST:event_btnLoginMouseExited
-
-    private void btnMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMailActionPerformed
-        
-        //Codigo para validar existencia del usuario
-        
-        //    Mail.sendEmail("juancarlos.jimenez@cliptecnologia.com");
-        
-        
-    }//GEN-LAST:event_btnMailActionPerformed
+    private void btnMailMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMailMouseMoved
+        Funciones.switchBtnIcon(getClass(), btnMail,"send",2);
+    }//GEN-LAST:event_btnMailMouseMoved
 
     /**
      * @param args the command line arguments
@@ -268,7 +384,8 @@ public class RestablecerContrasena extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnMail;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -278,10 +395,10 @@ public class RestablecerContrasena extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JTextField txtfCodigo;
+    private javax.swing.JPasswordField txtfConfirmaPasswd;
+    private javax.swing.JPasswordField txtfPasswd;
+    private javax.swing.JTextField txtfUsuario;
     // End of variables declaration//GEN-END:variables
 }

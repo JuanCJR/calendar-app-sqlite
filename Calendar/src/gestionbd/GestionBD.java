@@ -1,13 +1,39 @@
-
+/*
+ * The MIT License
+ *
+ * Copyright 2019 Juan Jimenez, Marco Avila.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package gestionbd;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
 import funciones.Funciones;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.RowSorter.SortKey;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class GestionBD {
     
@@ -165,7 +191,7 @@ public class GestionBD {
       
       //Crea Tarea
       public void CreaTarea(String Descripcion, String prioridad, String fecha,String cod_usuario,String cod_tarea){
-               
+               ImageIcon img = new ImageIcon(getClass().getResource("/iconos/ok2.png"));
         try{
             Class.forName(DRIVER);
             conn = DriverManager.getConnection(URL);
@@ -175,7 +201,7 @@ public class GestionBD {
                     "('"+Descripcion+"','"+prioridad+"','1','"+fecha+"','"+cod_usuario+"','"+cod_tarea+"')";
             
             sentencia.executeUpdate(SQL);
-           JOptionPane.showMessageDialog(null, "Nueva tarea creada", "EXITO!!",JOptionPane.INFORMATION_MESSAGE);
+           JOptionPane.showMessageDialog(null, "Nueva tarea creada", "EXITO!!",JOptionPane.INFORMATION_MESSAGE,img);
             
             sentencia.close();
             conn.close();
@@ -317,7 +343,7 @@ public class GestionBD {
         
     //Elimina tarea
          public void EliminaTarea(int codTarea){
-               
+         ImageIcon img = new ImageIcon(getClass().getResource("/iconos/cancel2.png"));
         try{
             Class.forName(DRIVER);
             conn = DriverManager.getConnection(URL);
@@ -326,7 +352,7 @@ public class GestionBD {
             String SQL = "DELETE FROM TAREAS "
                     + "WHERE COD_TAREA ="+codTarea;
             sentencia.executeUpdate(SQL);
-           JOptionPane.showMessageDialog(null, "Tarea Eliminada", "EXITO!!",JOptionPane.INFORMATION_MESSAGE);
+           JOptionPane.showMessageDialog(null, "Tarea Eliminada", "EXITO!!",JOptionPane.INFORMATION_MESSAGE,img);
             
             sentencia.close();
             conn.close();
@@ -392,7 +418,7 @@ public class GestionBD {
   
     };//.
        
-    //Elimina tarea
+    //Actualiza Tarea
          public void ActualizaTarea(String campo,String nuevoValor, int codTarea){
                
         try{
@@ -413,6 +439,55 @@ public class GestionBD {
         }catch(ClassNotFoundException | SQLException e){
             JOptionPane.showMessageDialog(null, "Error:" + e,"Error!!",JOptionPane.ERROR_MESSAGE);
         } 
-    };//. 
+    };//.
+         
+         
+         //Devuelve Correo de Usuario
+          public String getCorreo(String usuario){
+         String correo = "";
+        try{
+            Class.forName(DRIVER);
+            conn = DriverManager.getConnection(URL);
+            sentencia = conn.createStatement();
+            String SQL = "SELECT EMAIL FROM USUARIOS "+
+                    "where NOM_USUARIO = "+"'"+usuario+"'";
+            rs = sentencia.executeQuery(SQL);
+           correo = rs.getString("EMAIL");
+            System.out.println(correo);
+            
+            conn.close();
+           
+            
+        }catch(ClassNotFoundException | SQLException e){
+            JOptionPane.showMessageDialog(null, "Error:" + e,"Error!!",JOptionPane.ERROR_MESSAGE);
+        } 
+        
+         return correo;
+       
+    };//.
+          
+          //Actualiza contraseña
+          public void ActualizaContraseña(String usuario,String Passwd){
+               
+        try{
+            Class.forName(DRIVER);
+            conn = DriverManager.getConnection(URL);
+            
+            sentencia = conn.createStatement();
+            String SQL = "UPDATE USUARIOS " +
+                    "SET PASSWD ="+"'"+Passwd+"'"+
+                    " WHERE NOM_USUARIO ="+"'"+usuario+"'";
+            System.out.println(SQL);
+            sentencia.executeUpdate(SQL);
+             
+            sentencia.close();
+            conn.close();
+                    
+            
+        }catch(ClassNotFoundException | SQLException e){
+            JOptionPane.showMessageDialog(null, "Error:" + e,"Error!!",JOptionPane.ERROR_MESSAGE);
+        } 
+    };//.
+         
     
 }//FIN CLASE.
